@@ -1,0 +1,321 @@
+:root {
+  --primary: hsl(16, 73%, 61%);
+  --secondary: hsl(194, 67%, 45%);
+  --success: hsl(131, 47%, 44%);
+  --danger: hsl(357, 62%, 53%);
+  --warning: hsl(57  , 100%  , 43%);
+  --gray: hsla(0  , 0%  , 85%  , 0.27);
+  --white: hsl(0  , 0%  , 100%);
+  --black: hsl(0, 0%, 14%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 1200px;
+  background-color: var(--gray);
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  padding: 10px 35px 25px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.todoList {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 25px;
+  margin: 20px auto;
+  width: calc(100% - 100px);
+}
+
+.blockEvent {
+  pointer-events: none;
+ }
+
+.paginationBox {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  align-items:  center  ;
+}
+
+.paginationBtn {
+  padding:  8px 16px;
+  border:  none;
+  outline:  none;
+  background-color:  #aaa;
+  color:  var(--white);
+  font-weight:  bold;
+  border-radius:  4px;
+  cursor:  pointer;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color:  #888;
+  }
+}
+
+.resultShower {
+  display:  flex  ;
+  padding:  8px 16px  ;
+  background-color:  #72A9A9;
+  color:  var(--white)  ;
+  font-weight:  bold  ;
+  border-radius:  4px  ;
+  font-size:  12px  ;
+}
+
+ .styleTask  {
+  padding:  15px 25px;
+  border-radius:  5px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: var(--white);
+  width: 100%;
+  transition: 0.3s ease-in-out;
+  position:  relative;
+  overflow: hidden;
+
+  &:hover {
+    margin-top: -5px;
+    transform: scale(1.02);
+  }
+
+   @media(max-width: 768px) {
+     & {
+       width: calc(100% + 200px);
+       flex-wrap: wrap;
+     }
+   }
+
+}
+
+ .taskDone {
+   text-decoration: line-through;
+   opacity: 0.7;
+   background: #e0e1e2;
+   & > *:not(input[type='checkbox']) {
+     pointer-events: none;
+   }
+ }
+
+ .styleBtn {
+  border-radius:  5px;
+  border:  none;
+  outline:  none;
+  cursor:  pointer;
+  color:  var(--white);
+  font-weight: bold;
+  padding:  12px 25px;
+  margin-left:  auto;
+   @media(max-width: 768px) {
+     & {
+       margin-left: 0;
+     }
+   }
+}
+
+ .btnDelBackGround {
+   background-color:  var(--danger);
+ }
+
+.btnEditBackGround {
+  background-color:  var(--secondary);
+}
+
+ .spanTitleStyle  {
+  font-size:  17px;
+  font-weight:  bold;
+  color: var(--black);
+  cursor: pointer;
+   @media(max-width: 768px) {
+     & {
+       flex-grow: 1;
+     }
+   }
+}
+
+ .doneStyle  {
+  width:  18px;
+  height:  18px;
+}
+
+.boxEditing  {
+  display:  flex;
+  flex-direction:  column;
+  flex-grow: 1;
+}
+
+ .inputStyleEditing  {
+  padding:  12px 24px;
+  border-radius:  5px;
+  flex-grow: 1;
+}
+
+ .alertElementEditing  {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   display: none;
+   gap: 15px;
+   background: #fff;
+   padding: 15px 25px;
+
+   &.show {
+     display: flex;
+   }
+
+}
+
+ .styleForm  {
+  display: flex;
+  align-items: end;
+  background-color: var(--white);
+  padding: 25px 35px;
+  width: calc(100% + 50px);
+  border-radius: 5px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+ .styleFormBtn  {
+  padding: 15px 30px;
+  font-weight: bold;
+  color: var(--white);
+  background-color: var(--primary);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  flex-grow: 1;
+  transition: 0.5s ease-in-out;
+
+   &.cleanBtn {
+     background-color: var(--danger);
+     &:hover {
+       transform: scale(0.9);
+     }
+   }
+
+   &.sortBtn {
+     background-color: var(--success);
+     &:hover {
+       box-shadow: inset 500px 0 5px rgba(255, 255, 255, 0.35);
+     }
+   }
+
+   &:not(.sortBtn, .cleanBtn):hover {
+     background-color:  var(--white);
+     color:  var(--primary);
+     box-shadow: inset 0 0 5px var(--primary),inset 0 0 15px var(--white);
+   }
+
+}
+
+ .styleInput  {
+  padding: 12px 24px;
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  outline: none;
+   &.valid {
+     box-shadow: inset 1px 1px 2px #72a9a9, 1px 1px 1px #72A9A9;
+   }
+   &.notValid {
+     box-shadow: inset 1px 1px 2px #f55, 1px 1px 1px #f55;
+   }
+}
+
+ .boxInputsStyle  {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 15px;
+}
+
+ .styleError  {
+  font-size: 13px;
+  color: var(--danger);
+  margin-top: 5px;
+}
+
+ .alertBox {
+   display: block;
+   padding: 15px 35px;
+   background-color: var(--white);
+   color:  var(--danger);
+   border-radius:  4px;
+   box-shadow: inset 1px 1px 15px var(--white),inset 1px 1px 15px var(--gray), 0 0 0 1000px hsl(0deg 0% 0% / 27%);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   overflow: hidden;
+   text-align: center;
+   z-index: 1000;
+
+   & > .titleAlert {
+     background-color:  var(--danger);
+     color: var(--white);
+     width: calc(100% + 70px);
+     padding:  8px 16px;
+     margin: -15px 0 0 -35px;
+   }
+
+   & > .alertMessage {
+     color: var(--danger);
+     text-transform: capitalize;
+     font-size:  20px;
+     font-weight:  bold;
+     display: block;
+     width: 100%;
+     padding: 35px 0;
+   }
+
+   & > .alertBtn {
+     padding:  12px 24px;
+     border:  none;
+     outline:  none;
+     margin-left: 5px;
+     color:  var(--white);
+     border-radius:  4px;
+     cursor: pointer;
+       &.confirmation {
+         background-color: var(--danger);
+       }
+       &.annulation {
+         background-color: var(--black);
+         margin-left: auto;
+       }
+   }
+ }
+
+
+ .loader {
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: transparent;
+   border-radius: 50%;
+   border: 5px solid var(--danger);
+   border-top-color: transparent;
+   animation: spin 2s infinite linear alternate;
+ }
+
+
+ @keyframes spin {
+   0% { transform: translate(-50%, -50%) rotate(0deg); }
+   100% { transform: translate(-50%, -50%) rotate(360deg); }
+ }
