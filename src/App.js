@@ -21,7 +21,7 @@ function App() {
         } catch {
             console.log("Error loading todos");
         }
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         try {
