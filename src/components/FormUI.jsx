@@ -9,7 +9,6 @@ import {
     SORTED_LIST_TODO
 } from "../constants/actionTypes";
 import {useCallback, useRef} from "react";
-import TodoItem from "./TodoItem";
 
 export default function FormUI() {
 
