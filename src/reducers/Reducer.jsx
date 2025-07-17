@@ -10,7 +10,6 @@ import {
     CLEAN_TODOS_DONE,
     LOAD_DATA,
     SET_TITLE_VALID,
-    SEARCH_TODOS,
     SET_EDITING_TITLE,
     SET_MESSAGE_VALUE,
     SET_PAGINATION,
@@ -42,10 +41,7 @@ export default function reducer(state, action) {
         case `${FILTERED_TODOS}`:
             return {
             ...state,
-            filter: action.payload,
-            filteredTodos: action.payload === 'completed' ? [...state.todos.filter((todo) => todo.done === true)]
-                         : action.payload === 'active' ? [...state.todos.filter((todo) => todo.done === false)]
-                         : [...state.todos]
+            filter: action.payload
         };
         case `${EDIT_TODO}`: return {
             ...state,
@@ -67,10 +63,6 @@ export default function reducer(state, action) {
         case `${SET_VALUE_SEARCH}`: return {
             ...state,
             search: action.payload,
-        };
-        case `${SEARCH_TODOS}`: return {
-            ...state,
-            filteredTodos: state.todos.filter((todo) => todo.title.toLowerCase().includes(action.payload.toLowerCase()))
         };
         case `${SET_TITLE_VALUE}`: return {
             ...state,

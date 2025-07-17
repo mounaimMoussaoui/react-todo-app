@@ -18,7 +18,6 @@ export default function TodoProvider({ children }) {
         editTitle: '',
         pagination: 0,
         todos: [],
-        filteredTodos: [],
         globalTodos: [],
     }
 

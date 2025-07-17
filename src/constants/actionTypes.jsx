@@ -7,7 +7,6 @@ export const EDIT_TODO = "EDIT_TODO";
 export const CLEAN_TODOS_DONE = "CLEAN_TODOS_DONE";
 export const LOAD_DATA = "LOAD_DATA";
 export const SET_VALUE_SEARCH = "SET_VALUE_SEARCH";
-export const SEARCH_TODOS = "SEARCH_TODOS";
 export const SET_TITLE_VALUE = "SET_TITLE_VALUE";
 export const SET_TITLE_VALID = "SET_TITLE_VALID";
 export const SET_EDITING_TITLE = "SET_EDITING_TITLE";
