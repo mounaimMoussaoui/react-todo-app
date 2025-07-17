@@ -3,12 +3,13 @@ import styles from "../style/ModularStyle.module.scss";
 import {
     ADD_TODO,
     CLEAN_TODOS_DONE,
-    FILTERED_TODOS, SEARCH_TODOS, SET_TITLE_VALID,
+    FILTERED_TODOS, SET_TITLE_VALID,
     SET_TITLE_VALUE,
     SET_VALUE_SEARCH,
     SORTED_LIST_TODO
 } from "../constants/actionTypes";
-import {useRef} from "react";
+import {useCallback, useRef} from "react";
+import TodoItem from "./TodoItem";
 
 export default function FormUI() {
 
@@ -17,12 +18,12 @@ export default function FormUI() {
     const searchField = useRef(null);
     const titleField = useRef(null);
 
-    function resetField() {
+    const resetField = useCallback(() => {
         dispatch({type: SET_TITLE_VALUE, payload: ''});
         state.filter = "all";
-    }
+    }, [dispatch, state]);
 
-    function handleSubmit(e) {
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
         try {
             if (state.titleValid) {
@@ -38,45 +39,46 @@ export default function FormUI() {
         } catch (error) {
             console.error(error)
         }
-    }
+    }, [state.titleValid, state.title, dispatch, state.todos, resetField]);
 
-    function handelSort(e) {
+    const  handelSort = useCallback((e) => {
         e.preventDefault();
         dispatch({type: SORTED_LIST_TODO});
         resetField();
-    }
+    }, [dispatch, resetField]);
 
-    function handleCleanCompleted(e) {
+    const handleCleanCompleted = useCallback((e) => {
         e.preventDefault();
         dispatch({type: CLEAN_TODOS_DONE});
-    }
+        resetField();
+    }, [dispatch, resetField]);
 
-    function handleFiltered(e) {
+    const handleFiltered = useCallback(() => {
         dispatch({ type: FILTERED_TODOS, payload: filterField.current.value });
-    }
+    }, [dispatch]);
 
-    function handleSearch(e) {
+    const handleSearch = useCallback(() => {
         dispatch({type: SET_VALUE_SEARCH, payload: searchField.current.value});
-        dispatch({type: SEARCH_TODOS, payload: searchField.current.value.toLowerCase()});
-    }
+        resetField();
+    }, [dispatch, resetField]);
 
-    function handleChangeTitle(e) {
+    const handleChangeTitle = useCallback((e) => {
         dispatch({type: SET_TITLE_VALUE, payload: titleField.current.value});
         if((/\w.{10,}/gi).test(titleField.current.value)) {
             dispatch( {type: SET_TITLE_VALID, payload: true} );
         } else if(titleField.current.value !== "") {
             dispatch( {type: SET_TITLE_VALID, payload: false} );
         }
-    }
+    }, [dispatch]);
 
-    return (<form onSubmit={handleSubmit} className={styles['styleForm']}>
+    return (<form onSubmit={handleSubmit} id={'formControl'} className={styles['styleForm']}>
         <div className={styles['boxInputsStyle']}>
             <label htmlFor="title">Create Your Task: {state.titleValid === false && <span className={styles['styleError']}>Title Not Valid Must Be Greater-Then 10</span>}</label>
             <input type="text" className={`${styles['styleInput']} ${state.titleValid === false ? styles['notValid'] : styles['valid']}`} placeholder={"Create New task"} id={"title"} name={"title"} ref={titleField} required={true} value={state.title} onChange={handleChangeTitle} />
         </div>
         <div className={styles['boxInputsStyle']}>
             <label htmlFor="search">🔍 Search</label>
-            <input type="search" className={`${styles['styleInput']} ${styles['valid']}`} id={'search'} placeholder={'🔍 Search'} onChange={handleSearch} ref={searchField} value={state.search} />
+            <input type="search" name={'searchField'} className={`${styles['styleInput']} ${styles['valid']}`} id={'search'} placeholder={'🔍 Search'} onChange={handleSearch} ref={searchField} value={state.search} />
         </div>
         <div className={styles['boxInputsStyle']}>
             <label htmlFor="filter">Filter By Status</label>
@@ -88,8 +90,8 @@ export default function FormUI() {
         </div>
         <button className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"}>Add New Task</button>
 
-        <button onClick={handelSort} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}>Sort by Status</button>
+        <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}>Sort by Status</button>
 
-        <button onClick={handleCleanCompleted} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}>Clean Completed</button>
+        <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}>Clean Completed</button>
     </form>)
 }

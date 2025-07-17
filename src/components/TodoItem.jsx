@@ -7,7 +7,7 @@ import {
     SET_MESSAGE_VALUE,
     SET_TITLE_VALUE
 } from "../constants/actionTypes";
-import {useRef, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 
 export default function TodoItem({task, textDecoration}) {
     const { state, dispatch } = useTodoContext();
@@ -19,42 +19,42 @@ export default function TodoItem({task, textDecoration}) {
     const checkDone = useRef(null);
     const titleTodo = useRef(null);
 
-    function resetField() {
+    const resetField = useCallback(() => {
         dispatch({type: SET_TITLE_VALUE, payload: ''});
         state.filter = "all";
-    }
+    }, [dispatch, state]);
 
-    function handleDel(e, action) {
+    const handleDel = useCallback((e) => {
         e.preventDefault();
         dispatch( {type: SET_DELETED_ID, payload: +e.currentTarget.dataset.id} )
         dispatch( {type: SET_MESSAGE_VALUE, payload: "Are you sure you want to delete?"} );
-    }
+    }, [dispatch]);
 
-    function handleDone() {
+    const handleDone = useCallback(() => {
         dispatch({type: SET_DONE, payload: {id: +checkDone.current.dataset.id, value: checkDone.current.checked}});
         resetField();
-    }
+    }, [dispatch, resetField]);
 
-    function handleTitleClick() {
+    const handleTitleClick = useCallback(() => {
         setShowEditing(true);
         boxEdit.current.style.display = 'flex';
         editField.current.focus();
         dispatch({type: SET_EDITING_TITLE, payload: titleTodo.current.textContent});
-    }
+    }, [dispatch]);
 
-    function handleEditingField() {
+    const handleEditingField = useCallback(() => {
         dispatch({type: SET_EDITING_TITLE, payload: editField.current.value});
-    }
+    }, [dispatch]);
 
-    function handleBtnEdite() {
+    const handleBtnEdite = useCallback(() => {
         const idTask = editBtn.current.dataset.id;
         dispatch( {type: EDIT_TODO, payload: {id: +idTask, titleEditing: state.editTitle}} )
         boxEdit.current.style.display = 'none';
         resetField();
         setShowEditing(false);
-    }
+    }, [dispatch, resetField, state.editTitle]);
 
-    function handelKeyPressEditing(e) {
+    const handelKeyPressEditing = useCallback((e) => {
         if (e.key === "Enter") {
             handleBtnEdite();
         }
@@ -62,11 +62,11 @@ export default function TodoItem({task, textDecoration}) {
            boxEdit.current.style.display = 'none';
         }
         setShowEditing(false);
-    }
+    }, [handleBtnEdite]);
     
-    function handleOutSideClick() {
+    const handleOutSideClick = useCallback(() => {
         handleBtnEdite();
-    }
+    }, [handleBtnEdite]);
 
     return (<>
         <li className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
@@ -74,7 +74,7 @@ export default function TodoItem({task, textDecoration}) {
             <div className={styles['boxEditing']}>
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>
                 <div className={`${styles['alertElementEditing']} ${showEditing && 'show'}`} ref={boxEdit}>
-                    <input type="text" value={state.editTitle} ref={editField} onChange={handleEditingField} className={styles['inputStyleEditing']} data-id={task.id} onKeyDown={handelKeyPressEditing} onBlur={handleOutSideClick}/>
+                    <input type="text" name={"titleOnEditing"} value={state.editTitle} ref={editField} onChange={handleEditingField} className={styles['inputStyleEditing']} data-id={task.id} onKeyDown={handelKeyPressEditing} onBlur={handleOutSideClick}/>
                     <button data-id={task.id} className={`${styles['styleBtn']} ${styles['btnEditBackGround']}`} ref={editBtn} onClick={handleBtnEdite}>Edit</button>
                 </div>
             </div>

@@ -1,19 +1,20 @@
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {REMOVE_TODO, SET_MESSAGE_VALUE} from "../constants/actionTypes";
+import {useCallback} from "react";
 
 export default function AlertBox({id}) {
 
     const {state, dispatch} = useTodoContext();
 
-    function handleConfirmation(action) {
+    const handleConfirmation = useCallback((action) => {
         if(action === "yes") {
             dispatch({ type: REMOVE_TODO, payload: state.idDel });
             dispatch( {type: SET_MESSAGE_VALUE, payload: ""} )
         } else if( action === "no") {
             dispatch( {type: SET_MESSAGE_VALUE, payload: ""} )
         }
-    }
+    }, [dispatch, state.idDel]);
 
     return (
         <div className={styles['alertBox']}>

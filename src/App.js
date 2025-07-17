@@ -14,7 +14,6 @@ function App() {
 
     const [ todos, setTodos ] = useLocalStorage('todos', []);
 
-
     useEffect(() => {
         try {
             dispatch({type: LOAD_DATA, payload: todos});
@@ -22,7 +21,7 @@ function App() {
         } catch {
             console.log("Error loading todos");
         }
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         try {
@@ -35,9 +34,16 @@ function App() {
         }
     }, [state.todos, dispatch, setTodos]);
 
-    useEffect( () => {
-        dispatch( {type: SET_GLOBAL_TODOS, payload: state.filteredTodos} );
-    }, [state.filteredTodos, dispatch]);
+    const fltSerTodos = useMemo(() => {
+        return state.filter === "completed" ? todos.filter((todo) => todo.done === true)
+            : state.filter === 'active' ? todos.filter((todo) => todo.done === false) : state.search !== ""
+            ? todos.filter(todo => todo.title.toLowerCase().includes(state.search.toLowerCase())) : todos;
+
+    }, [todos, state.filter, state.search]);
+
+    useEffect(() => {
+        dispatch( {type: SET_GLOBAL_TODOS, payload: fltSerTodos } );
+    }, [dispatch, fltSerTodos]);
 
     const visibleTodos = useMemo( () => {
 
