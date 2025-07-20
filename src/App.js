@@ -4,7 +4,7 @@ import FormUI from "./components/FormUI";
 import PaginationForm from "./components/PaginationForm";
 import styles from "./style/ModularStyle.module.scss";
 import {useTodoContext} from "./contexts/TodoProvider";
-import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes";
+import {SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes";
 import Loader from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 
@@ -14,7 +14,14 @@ function App() {
 
     const [ todos, setTodos ] = useLocalStorage('todos', []);
 
-
+    useEffect(() => {
+        try {
+            dispatch({type: SET_GLOBAL_TODOS, payload: todos })
+            dispatch( {type: SET_LOADING, payload: true} );
+        } catch {
+            console.log("Error loading todos");
+        }
+    }, [dispatch, todos]);
 
     useEffect(() => {
         try {
