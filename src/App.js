@@ -1,10 +1,10 @@
 import React, {Suspense, useEffect, useMemo} from "react";
 import {FormUI} from "./components/FormUI";
-import PaginationForm from "./components/PaginationForm";
+import {PaginationForm} from "./components/PaginationForm";
 import styles from "./style/ModularStyle.module.scss";
 import {useTodoContext} from "./contexts/TodoProvider";
 import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes";
-import Loader from "./components/Loader";
+import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
 

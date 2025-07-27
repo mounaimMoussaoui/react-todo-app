@@ -7,7 +7,7 @@ import {
     SET_TITLE_VALUE
 } from "../constants/actionTypes";
 import React, {Suspense, useCallback, useRef, useState} from "react";
-import Loader from "./Loader";
+import {Loader} from "./Loader";
 
 const AlertBox = React.lazy(() => import("./AlertBox"));
 

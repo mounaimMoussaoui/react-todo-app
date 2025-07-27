@@ -1,9 +1,9 @@
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {SET_PAGINATION} from "../constants/actionTypes";
-import {useCallback} from "react";
+import React, {useCallback} from "react";
 
-export default function PaginationForm() {
+export const PaginationForm = React.memo(() => {
 
     const {state, dispatch} = useTodoContext();
 
@@ -20,4 +20,4 @@ export default function PaginationForm() {
                 <span className={styles['resultShower']}>{` ${Math.ceil(state.globalTodos.length / 5)} / ${Math.ceil(state.pagination / 5) + 1}`}</span>
                 <button className={styles['paginationBtn']} id={'btnMoveUp'} onClick={handlePagination} data-action={"moveUp"}>Move UP</button>
            </div>
-}
+})
