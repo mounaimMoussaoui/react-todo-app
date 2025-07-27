@@ -1,12 +1,12 @@
-import React, {useEffect, useMemo} from "react";
-import TodoItem from "./components/TodoItem";
-import FormUI from "./components/FormUI";
+import React, {Suspense, useEffect, useMemo} from "react";
+import {FormUI} from "./components/FormUI";
 import PaginationForm from "./components/PaginationForm";
 import styles from "./style/ModularStyle.module.scss";
 import {useTodoContext} from "./contexts/TodoProvider";
-import {SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes";
+import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes";
 import Loader from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
+import {TodoItem} from "./components/TodoItem";
 
 function App() {
 
@@ -16,12 +16,13 @@ function App() {
 
     useEffect(() => {
         try {
-            dispatch({type: SET_GLOBAL_TODOS, payload: todos })
+            dispatch({type: LOAD_DATA, payload: todos })
             dispatch( {type: SET_LOADING, payload: true} );
         } catch {
             console.log("Error loading todos");
         }
-    }, [dispatch, todos]);
+        // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
         try {
@@ -55,13 +56,11 @@ function App() {
        <section className={styles.container}>
            <FormUI />
            <ul className={styles.todoList}>
-                { !state.loading ? <Loader />
+                { !state.loading ? <Suspense fallback={<Loader />} />
                    : state.globalTodos.length > 0
-                   ? visibleTodos.map((item) => (
-                        <TodoItem task={item} key={item.id}
-                                  textDecoration={item.done}
-                        />
-                    )) : "No Task Have Yet"
+                   ? visibleTodos.map((item) => {
+                        return <TodoItem task={item} key={item.id} textDecoration={item.done}/>
+                    }) : "No Task Have Yet"
                 }
             </ul>
             <PaginationForm />

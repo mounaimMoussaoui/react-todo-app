@@ -1,4 +1,3 @@
-import AlertBox from "./AlertBox";
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {
@@ -7,9 +6,13 @@ import {
     SET_MESSAGE_VALUE,
     SET_TITLE_VALUE
 } from "../constants/actionTypes";
-import {useCallback, useRef, useState} from "react";
+import React, {Suspense, useCallback, useRef, useState} from "react";
+import Loader from "./Loader";
 
-export default function TodoItem({task, textDecoration}) {
+const AlertBox = React.lazy(() => import("./AlertBox"));
+
+
+export const TodoItem = React.memo(({task, textDecoration}) => {
     const { state, dispatch } = useTodoContext();
     const [showEditing, setShowEditing] = useState(false);
     const deleteBtn = useRef(null);
@@ -80,7 +83,7 @@ export default function TodoItem({task, textDecoration}) {
             </div>
             <button className={`${styles['styleBtn']} ${styles['btnDelBackGround']}`} data-id={task.id} ref={deleteBtn} onClick={handleDel}>delete</button>
         </li>
-        { state.message ? <AlertBox /> : ""}
+        { state.message ? <Suspense fallback={<Loader />}><AlertBox /></Suspense> : ""}
     </>
     )
-}
+});

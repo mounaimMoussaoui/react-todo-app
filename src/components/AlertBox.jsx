@@ -1,9 +1,9 @@
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {REMOVE_TODO, SET_MESSAGE_VALUE} from "../constants/actionTypes";
-import {useCallback} from "react";
+import React, {useCallback} from "react";
 
-export default function AlertBox({id}) {
+export default function AlertBox() {
 
     const {state, dispatch} = useTodoContext();
 

@@ -5,8 +5,10 @@ Users can Create, edit, delete, search, filter, paginate, and persist tasks in l
 
 ## Live Demo
 
-try it out here: (in-progress)
+try it out here: 
 https://687c584e6112c142daf61e31--todo-curd-app-react.netlify.app/
+
+code source here:
 https://mounaimmoussaoui.github.io/react-todo-app/
 
 ## Features

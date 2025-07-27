@@ -8,9 +8,9 @@ import {
     SET_VALUE_SEARCH,
     SORTED_LIST_TODO
 } from "../constants/actionTypes";
-import {useCallback, useRef} from "react";
+import React, {useCallback, useRef} from "react";
 
-export default function FormUI() {
+export const FormUI = React.memo(() => {
 
     const { state, dispatch } = useTodoContext();
     const filterField = useRef(null);
@@ -93,4 +93,4 @@ export default function FormUI() {
 
         <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}>Clean Completed</button>
     </form>)
-}
+})
