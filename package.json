@@ -10,7 +10,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
-    "react-scripts": "latest",
     "sass": "^1.89.2",
     "web-vitals": "^2.1.4"
   },
@@ -37,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
   }
 }
