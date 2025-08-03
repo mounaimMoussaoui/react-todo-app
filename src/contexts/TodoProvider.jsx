@@ -5,6 +5,7 @@ export const TodoContext = createContext();
 export default function TodoProvider({ children }) {
 
     const initialState = {
+        user: null,
         nbElements: 5,
         startValue: 0,
         title: '',
@@ -12,7 +13,7 @@ export default function TodoProvider({ children }) {
         search: '',
         message: '',
         idDel: -1,
-        delConfirmation: undefined,
+        inNotFonded: false,
         filter: 'all',
         loading: false,
         editTitle: '',

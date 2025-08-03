@@ -15,35 +15,35 @@ import {
     SET_PAGINATION,
     SET_LOADING,
     SET_GLOBAL_TODOS,
-    SET_DELETED_ID
+    SET_DELETED_ID, NOT_FOUND, SET_USER
 } from "../constants/actionTypes";
 
 export default function reducer(state, action) {
     switch(action.type) {
-        case `${ADD_TODO}`:
+        case ADD_TODO:
             return {
                 ...state,
                 todos: [action.payload ,...state.todos],
             };
-        case `${REMOVE_TODO}`:
+        case REMOVE_TODO:
             return {
                 ...state,
                 todos: state.todos.filter((todo) => todo.id !== action.payload)
             };
-        case `${SET_DONE}`: return {
+        case SET_DONE: return {
             ...state,
             todos: state.todos.map( todo =>  todo.id === action.payload.id ? {...todo, done: action.payload.value} : todo ),
         };
-        case `${SORTED_LIST_TODO}`: return {
+        case SORTED_LIST_TODO: return {
             ...state,
             todos: state.todos = [...state.todos.filter((todo) => !todo.done), ...state.todos.filter((todo) => todo.done)],
         };
-        case `${FILTERED_TODOS}`:
+        case FILTERED_TODOS:
             return {
             ...state,
             filter: action.payload
         };
-        case `${EDIT_TODO}`: return {
+        case EDIT_TODO: return {
             ...state,
             todos: state.todos.map(todo => {
                 if(todo.id === action.payload.id) {
@@ -52,49 +52,57 @@ export default function reducer(state, action) {
                 return todo;
             })
         };
-        case `${CLEAN_TODOS_DONE}`: return {
+        case CLEAN_TODOS_DONE: return {
           ...state,
           todos: state.todos.filter((todo) => !todo.done)
         };
-        case `${LOAD_DATA}`: return {
+        case LOAD_DATA: return {
             ...state,
             todos: [...action.payload],
         };
-        case `${SET_VALUE_SEARCH}`: return {
+        case SET_VALUE_SEARCH: return {
             ...state,
             search: action.payload,
         };
-        case `${SET_TITLE_VALUE}`: return {
+        case SET_TITLE_VALUE: return {
             ...state,
             title: action.payload,
         };
-        case `${SET_TITLE_VALID}`: return {
+        case SET_TITLE_VALID: return {
             ...state,
             titleValid: action.payload,
         };
-        case `${SET_EDITING_TITLE}`: return {
+        case SET_EDITING_TITLE: return {
           ...state,
           editTitle: action.payload,
         };
-        case `${SET_MESSAGE_VALUE}`: return {
+        case SET_MESSAGE_VALUE: return {
             ...state,
             message: action.payload,
         };
-        case `${SET_PAGINATION}`: return {
+        case SET_PAGINATION: return {
             ...state,
             pagination: state.pagination + action.payload,
         };
-        case `${SET_GLOBAL_TODOS}`: return {
+        case SET_GLOBAL_TODOS: return {
           ...state,
           globalTodos: action.payload,
         };
-        case `${SET_LOADING}`: return {
+        case SET_LOADING: return {
             ...state,
             loading: action.payload,
         };
-        case `${SET_DELETED_ID}`: return {
+        case SET_DELETED_ID: return {
             ...state,
             idDel: action.payload,
+        };
+        case NOT_FOUND: return {
+            ...state,
+            inNotFonded: action.payload,
+        };
+        case SET_USER: return {
+            ...state,
+            user: action.payload,
         }
         default: return state;
     }

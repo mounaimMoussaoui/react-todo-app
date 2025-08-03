@@ -1,6 +1,6 @@
 :root {
   --primary: hsl(16, 73%, 61%);
-  --secondary: hsl(194, 67%, 45%);
+  --secondary: hsl(195, 79%, 29%);
   --success: hsl(131, 47%, 44%);
   --danger: hsl(357, 62%, 53%);
   --warning: hsl(57  , 100%  , 43%);
@@ -299,6 +299,131 @@
    }
  }
 
+ .navbar {
+   padding: 15px 25px;
+   background-color: var(--white);
+   border-bottom: 2px solid var(--gray);
+   height: 80px;
+   max-width: 1200px;
+   margin: auto;
+   position: relative;
+   @media (max-width: 968px) {
+     .navbar {
+       width: 100%;
+     }
+   }
+
+   & > * {
+     position: absolute;
+     left: 25px;
+     top: 0;
+   }
+
+   ul {
+     list-style: none;
+     display: flex;
+     gap: 25px;
+     align-items: center;
+     min-height: 100%;
+
+     li {
+       width: 100%;
+       height: 80px;
+       padding: 0 15px;
+
+       a {
+         color: var(--black);
+         height: 100%;
+         width: calc(100% + 30px);
+         font-weight:  500;
+         font-size: 18px;
+         text-decoration: none;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         position: relative;
+         z-index: 12;
+         transition: 0.3s ease-in-out;
+
+         &::before,
+         &::after {
+           content: "";
+           position: absolute;
+           width: 0;
+           height: 2px;
+           transition: width 0.3s ease-in-out;
+           z-index: -1;
+         }
+
+         &::before {
+           top: 0;
+           left: 0;
+           background-color: var(--primary);
+
+         }
+
+         &::after {
+           right: 0;
+           bottom: 2px;
+           background-color: var(--success);
+         }
+
+         &:hover::before,
+         &:hover::after,
+         &.active::before,
+         &.active::after {
+           width: 100%;
+         }
+
+         &:hover,
+         &.active {
+           -webkit-text-stroke: 1px var(--black);
+           -webkit-text-fill-color: var(--white);
+         }
+
+       }
+     }
+   }
+ }
+
+ .containerNotFound {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding:  150px 25px;
+ }
+
+ .notFound {
+   position: relative;
+   text-transform: uppercase;
+   letter-spacing: 5px;
+   width: fit-content;
+   font-size:  40px;
+   font-weight: bold;
+   -webkit-text-stroke: 2px var(--black);
+  -webkit-text-fill-color: transparent;
+   &::after,
+   &::before {
+     content: attr(data-content);
+     position: absolute;
+     left: 0;
+     text-transform: uppercase;
+     overflow: hidden;
+     transition: 0.3s;
+     width: 100%;
+   }
+
+   &::before {
+     -webkit-text-fill-color: var(--primary);
+     -webkit-text-stroke-color: var(--primary);
+     animation: leftRight 1s ease-in-out infinite alternate;
+   }
+   &::after {
+     -webkit-text-stroke: 2px var(--black);
+     -webkit-text-fill-color: var(--white);
+     animation: leftRightReverse 1s ease-in-out infinite alternate;
+   }
+ }
 
  .loader {
    position: absolute;
@@ -314,8 +439,32 @@
    animation: spin 2s infinite linear alternate;
  }
 
+ .link {
+   color: var(--secondary);
+   cursor: pointer;
+   user-select: none;
+ }
+
 
  @keyframes spin {
    0% { transform: translate(-50%, -50%) rotate(0deg); }
    100% { transform: translate(-50%, -50%) rotate(360deg); }
  }
+
+ @keyframes leftRight {
+   0% {
+     width: 0;
+   }
+   100% {
+     width: 100%;
+   }
+ }
+
+@keyframes leftRightReverse {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}

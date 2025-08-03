@@ -14,4 +14,6 @@ export const SET_MESSAGE_VALUE = "SET_MESSAGE_VALUE";
 export const SET_PAGINATION = "SET_PAGINATION";
 export const SET_GLOBAL_TODOS = "SET_GLOBAL_TODOS";
 export const SET_LOADING = "SET_LOADING";
-export const SET_DELETED_ID = "SET_DELETED_ID"
+export const SET_DELETED_ID = "SET_DELETED_ID";
+export const SET_USER = 'SET_USER';
+export const NOT_FOUND = 'NOT_FOUND';

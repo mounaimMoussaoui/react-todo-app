@@ -8,8 +8,7 @@ import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
 
-function App() {
-
+export const App = React.memo(() => {
     const { state, dispatch } = useTodoContext();
 
     const [ todos, setTodos ] = useLocalStorage('todos', []);
@@ -19,7 +18,7 @@ function App() {
             dispatch({type: LOAD_DATA, payload: todos })
             dispatch( {type: SET_LOADING, payload: true} );
         } catch {
-            console.log("Error loading todos");
+            console.log("Error to loading todos");
         }
         // eslint-disable-next-line
     }, []);
@@ -66,6 +65,4 @@ function App() {
             <PaginationForm />
        </section>
        );
-}
-
-export default App;
+})
