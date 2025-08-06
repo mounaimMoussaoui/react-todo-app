@@ -9,7 +9,7 @@ export const ProtectRoute = React.memo(({children}) => {
 
     useEffect(() => {
         if (user === null) {
-            navigate("/", {replace: true});
+            navigate("/login", {replace: true});
         }
     }, [user, navigate]);
 

@@ -15,7 +15,7 @@ export const Routes = React.memo(() => {
         element: <Layout />,
         children: [
             {
-              path: "/",
+              path: "/login",
               element: <Login />,
             },
            {
