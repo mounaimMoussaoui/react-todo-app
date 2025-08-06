@@ -7,9 +7,9 @@ import {useAuthenticationContext} from "../contexts/AuthentificationProvider";
 import {ADD_USER} from "../constants/actionTypes";
 
 export const SingUp = React.memo(() => {
-    const {state, dispatch} = useAuthenticationContext();
+    const {dispatch} = useAuthenticationContext();
     const navigate = useNavigate();
-    const { values, errors, touched, handleChange,handleBlur } = useFormik({
+    const { values, errors, touched, handleChange,handleBlur} = useFormik({
         initialValues: {
             identifier: '',
             fullName: '',
@@ -26,13 +26,9 @@ export const SingUp = React.memo(() => {
             dispatch({type: ADD_USER, payload: values});
     }, []);
 
-    useEffect(() => {
-        console.log(state.listUsers);
-    }, [state.listUsers]);
-
    return (<>
        <h2 className={styles.titlePage}>Sing Up Page</h2>
-       <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handelSubmit}>
+        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handelSubmit}>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
                <input type="text" id="identifier"
