@@ -12,17 +12,7 @@ export const Login = React.memo(() => {
     const [userSession, setUserSession] = useSession( "user", null);
     const {dispatch} = useTodoContext();
 
-    const {values,  errors, touched, handleChange, handleBlur} = useFormik({
-        initialValues: {
-            identifier: '',
-            password: '',
-        },
-        validationSchema: schemaLoginSchema,
-        onsubmit,
-    });
-
-    function handleSubmit(e) {
-        e.preventDefault();
+    const onSubmit = (values) => {
         const {identifier, password} = values;
         if (identifier && identifier === 'user101' && password && password === 'Admin101') {
             const user = {identifier, password};
@@ -30,6 +20,15 @@ export const Login = React.memo(() => {
             dispatch({type: SET_USER, payload: userSession});
         }
     }
+
+    const {values,  errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
+        initialValues: {
+            identifier: '',
+            password: '',
+        },
+        validationSchema: schemaLoginSchema,
+        onSubmit,
+    });
 
     return (<>
         <h2 className={styles.titlePage}>Authentication Page</h2>

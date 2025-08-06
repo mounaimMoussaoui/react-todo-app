@@ -3,13 +3,18 @@ import styles from "../style/ModularStyle.module.scss";
 import {useFormik} from "formik";
 import {SchemaSingUp} from "../schemas/SchemaSingUp";
 import {useNavigate} from "react-router-dom";
-import {useAuthenticationContext} from "../contexts/AuthentificationProvider";
-import {ADD_USER} from "../constants/actionTypes";
+import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
+import {ADD_USER, SET_USER} from "../constants/actionTypes";
 
 export const SingUp = React.memo(() => {
     const {dispatch} = useAuthenticationContext();
     const navigate = useNavigate();
-    const { values, errors, touched, handleChange,handleBlur} = useFormik({
+
+    const onSubmit = (values) => {
+        dispatch({type: SET_USER, payload: values});
+    }
+
+    const { values, errors, touched, handleChange,handleBlur, handleSubmit} = useFormik({
         initialValues: {
             identifier: '',
             fullName: '',
@@ -18,17 +23,12 @@ export const SingUp = React.memo(() => {
             confirmPassword: '',
         },
         validationSchema: SchemaSingUp,
-        onsubmit,
+        onSubmit,
     });
-
-    const handelSubmit  = useCallback((e) => {
-        e.preventDefault();
-            dispatch({type: ADD_USER, payload: values});
-    }, []);
 
    return (<>
        <h2 className={styles.titlePage}>Sing Up Page</h2>
-        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handelSubmit}>
+        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
                <input type="text" id="identifier"

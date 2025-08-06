@@ -6,13 +6,18 @@ import {NotFoundPage} from "../components/NotFoundPage";
 import {Abouts} from "../components/Abouts";
 import {ProtectRoute} from "../utilites/ProtectRoute";
 import {SingUp} from "../authentification/Singup";
-import AuthenticationProvider from "../contexts/AuthentificationProvider";
+import AuthenticationProvider from "../contexts/AuthenticationProvider";
+import {Login} from "../authentification/Login";
 
 export const Routes = React.memo(() => {
     const browserRoutes = createBrowserRouter([{
         path: '/',
         element: <Layout />,
         children: [
+            {
+              path: "/",
+              element: <Login />,
+            },
            {
                 path: '/singUp',
                 element: <AuthenticationProvider><SingUp /></AuthenticationProvider>,
