@@ -1,17 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useTodoContext} from "../contexts/TodoProvider";
-import {useNavigate} from "react-router-dom";
+import {Login} from "../authentification/Login";
 
 export const ProtectRoute = React.memo(({children}) => {
     const {state} = useTodoContext();
-    const navigate = useNavigate();
     const user =  state.user;
 
-    useEffect(() => {
-        if (user === null) {
-            navigate("/login", {replace: true});
-        }
-    }, [user, navigate]);
-
-    return children
+    return user === null ? <Login/> : children
 })
