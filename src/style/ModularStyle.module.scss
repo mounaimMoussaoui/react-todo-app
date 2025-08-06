@@ -384,6 +384,18 @@
        }
      }
    }
+   .btnLogout {
+     position: relative;
+     padding: 12px 25px;
+     background-color: var(--black);
+     color: var(--white);
+     border-radius:  4px;
+     top: 50%;
+     left: calc(100% - 125px);
+     width: 100px;
+     transform: translateY(-50%);
+     cursor: pointer;
+   }
  }
 
  .containerNotFound {
@@ -439,11 +451,89 @@
    animation: spin 2s infinite linear alternate;
  }
 
- .link {
-   color: var(--secondary);
-   cursor: pointer;
-   user-select: none;
+ .titlePage {
+   position: relative;
+   display: block;
+   margin: 15px auto 0;
+   width: fit-content;
+   padding: 0 20px;
+
+   &::before,
+   &::after {
+     content: '';
+     position: absolute;
+     top: 50%;
+     width: 10px;
+     height: 10px;
+     border-radius: 50%;
+     background-color: var(--black);
+   }
+
+   &::before {
+     left: -10px;
+   }
+
+   &::after {
+     right: -10px;
+   }
  }
+
+.formContainer {
+  background-color: #fff;
+  max-width: 700px;
+   .groupForm {
+     display: flex;
+     flex-direction: column;
+     width: 60%;
+     @media (max-width: 768px) {
+       & {
+          width: 100%;
+       }
+     }
+     & > label {
+       font-weight: 600;
+       text-transform: capitalize;
+       margin-bottom: 10px;
+     }
+     & > input {
+       padding: 12px 25px;
+       border-radius: 5px;
+       border: none;
+       outline: none;
+       box-shadow: 1px 1px 1px var(--black);
+       margin-bottom: 5px;
+       background-color: var(--white);
+
+       &.invalid {
+         box-shadow: 1px 1px 1px var(--danger);
+       }
+
+       &.valid {
+         box-shadow: 1px 1px 1px var(--success);
+       }
+
+     }
+     & > span {
+       font-size:  14px;
+       color: var(--danger);
+     }
+   }
+  button {
+    margin: 0 auto;
+    background-color: var(--black);
+  }
+  span {
+    font-size:  14px;
+    display: flex;
+    gap: 10px;
+    color: #777;
+    .link {
+      color: var(--secondary);
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
 
 
  @keyframes spin {

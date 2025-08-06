@@ -6,23 +6,24 @@ import {NotFoundPage} from "../components/NotFoundPage";
 import {Abouts} from "../components/Abouts";
 import {ProtectRoute} from "../utilites/ProtectRoute";
 import {SingUp} from "../authentification/Singup";
+import AuthenticationProvider from "../contexts/AuthentificationProvider";
 
 export const Routes = React.memo(() => {
     const browserRoutes = createBrowserRouter([{
         path: '/',
-        element: <ProtectRoute><Layout /></ProtectRoute>,
+        element: <Layout />,
         children: [
-            {
+           {
                 path: '/singUp',
-                element: <SingUp />,
+                element: <AuthenticationProvider><SingUp /></AuthenticationProvider>,
             },
            {
                 path: '/home',
-                element:  <App/> ,
+                element: <ProtectRoute> <App/> </ProtectRoute> ,
             },
             {
                 path: '/about',
-                element: <Abouts />,
+                element: <ProtectRoute><Abouts /></ProtectRoute>,
             },
             {
                 path: '*',

@@ -2,14 +2,17 @@ import React, {useCallback, useEffect} from "react";
 import styles from "../style/ModularStyle.module.scss";
 import {useFormik} from "formik";
 import {SchemaSingUp} from "../schemas/SchemaSingUp";
+import {useNavigate} from "react-router-dom";
+import {useAuthenticationContext} from "../contexts/AuthentificationProvider";
+import {ADD_USER} from "../constants/actionTypes";
 
 export const SingUp = React.memo(() => {
-
+    const {state, dispatch} = useAuthenticationContext();
+    const navigate = useNavigate();
     const { values, errors, touched, handleChange,handleBlur } = useFormik({
         initialValues: {
             identifier: '',
-            firstName: '',
-            lastName: '',
+            fullName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -18,35 +21,64 @@ export const SingUp = React.memo(() => {
         onsubmit,
     });
 
-    useEffect(() => {
-        console.log(errors, values);
-    }, [values]);
+    const handelSubmit  = useCallback((e) => {
+        e.preventDefault();
+            dispatch({type: ADD_USER, payload: values});
+    }, []);
 
-   return (<form className={styles.container}>
-       <div aria-label={"group-form"}>
-           <label htmlFor="identifier">Identifier</label>
-           <input type="text" id="identifier" autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
-       </div>
-       <div aria-label={"group-form"}>
-           <label htmlFor="FirstName">First Name</label>
-           <input type="text" id="FirstName" name="firstName" value={values.firstName} onChange={handleChange} onBlur={handleBlur} placeholder="First Name"/>
-       </div>
-       <div aria-label={"group-form"}>
-           <label htmlFor="LastName">Last Name</label>
-           <input type="text" id="LastName" name="lastName" value={values.lastName} onChange={handleChange} onBlur={handleBlur} placeholder="Last Name"/>
-       </div>
-       <div aria-label={"group-form"}>
-           <label htmlFor="email">Email</label>
-           <input type="email" autoComplete={"email"} id="email" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
-       </div>
-       <div aria-label={"group-form"}>
-           <label htmlFor="password">Password</label>
-           <input type="password" id="password" autoComplete={"current-password"} name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
-       </div>
-       <div aria-label={"group-form"}>
-           <label htmlFor="confirmPassword">Password</label>
-           <input type="password" id="confirmPassword" autoComplete={"current-password"} name="confirmPassword" value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur} placeholder="Confirm Password"/>
-       </div>
-       <button className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}>Sing Up</button>
-   </form>)
+    useEffect(() => {
+        console.log(state.listUsers);
+    }, [state.listUsers]);
+
+   return (<>
+       <h2 className={styles.titlePage}>Sing Up Page</h2>
+       <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handelSubmit}>
+           <div aria-label={"group-form"} className={`${styles.groupForm}`}>
+               <label htmlFor="identifier">Identifier</label>
+               <input type="text" id="identifier"
+                      className={errors.identifier ? styles.invalid : styles.valid}
+                      autoComplete={"username"} name="identifier" value={values.identifier}
+                      onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
+               {errors.identifier && touched.identifier ? (<span>{errors.identifier}</span>) : null}
+           </div>
+           <div aria-label={"group-form"} className={`${styles.groupForm}`}>
+               <label htmlFor="FullName">Full Name</label>
+               <input type="text" id="FullName"
+                      className={errors.fullName ? styles.invalid : styles.valid} name="fullName"
+                      value={values.fullName} onChange={handleChange}
+                      onBlur={handleBlur} placeholder="Full Name"/>
+               {errors.fullName && touched.fullName ? (<span>{errors.fullName}</span>) : null}
+           </div>
+           <div aria-label={"group-form"} className={`${styles.groupForm}`}>
+               <label htmlFor="email">Email</label>
+               <input type="email" autoComplete={"email"} id="email"
+                      className={errors.email ? styles.invalid : styles.valid} name="email"
+                      value={values.email}
+                      onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
+               {errors.email && touched.email ? (<span>{errors.email}</span>) : null}
+           </div>
+           <div aria-label={"group-form"} className={`${styles.groupForm}`}>
+               <label htmlFor="password">Password</label>
+               <input type="password" id="password"
+                      className={errors.password ? styles.invalid : styles.valid}
+                      autoComplete={"current-password"} name="password"
+                      value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
+               {errors.password && touched.password ? (<span>{errors.password}</span>) : null}
+           </div>
+           <div aria-label={"group-form"} className={`${styles.groupForm}`}>
+               <label htmlFor="confirmPassword">Confirm Password</label>
+               <input type="password" id="confirmPassword"
+                      className={errors.confirmPassword ? styles.invalid : styles.valid}
+                      autoComplete={"current-password"} name="confirmPassword"
+                      value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}
+                      placeholder="Confirm Password"/>
+               {errors.confirmPassword && touched.confirmPassword ? (<span>{errors.confirmPassword}</span>) : null}
+           </div>
+           <button className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}>Sing
+               Up
+           </button>
+           <span>I'm Ready Have Account ?<span className={styles.link} onClick={() => navigate(-1)}>Login</span></span>
+
+       </form>
+   </>)
 });
