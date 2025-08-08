@@ -1,23 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../style/ModularStyle.module.scss";
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {schemaLoginSchema} from "../schemas/SchemaLogin";
 import {useTodoContext} from "../contexts/TodoProvider";
-import {SET_USER} from "../constants/actionTypes";
+import {ADD_USER, SET_USER} from "../constants/actionTypes";
 import useSession from "../customsHooks/useSession";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
 import {motion} from 'framer-motion';
+import useLocalStorage from "../customsHooks/useLocalStorage";
 export const Login = React.memo(() => {
     const navigate = useNavigate();
+    const [usersStorage] = useLocalStorage('listUsers', []);
     const [userSession, setUserSession] = useSession( "user", null);
     const {dispatch} = useTodoContext();
     const {state} = useAuthenticationContext();
 
     const onSubmit = (values) => {
         const {identifier, password} = values;
-
-        const existUser = state.listUsers.filter((user) => {
+        const existUser = usersStorage.filter((user) => {
             return user.identifier === identifier;
         });
         console.log(state.listUsers);

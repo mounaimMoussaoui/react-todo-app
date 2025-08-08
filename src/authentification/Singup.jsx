@@ -5,17 +5,17 @@ import {SchemaSingUp} from "../schemas/SchemaSingUp";
 import {useNavigate} from "react-router-dom";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
 import {ADD_USER} from "../constants/actionTypes";
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import useLocalStorage from "../customsHooks/useLocalStorage";
 
 export const SingUp = React.memo(() => {
-    const {state, dispatch} = useAuthenticationContext();
-    // const [listUsers, setListUsers] = useLocalStorage('listUsers', []);
+    const {dispatch} = useAuthenticationContext();
     const navigate = useNavigate();
-    const onSubmit = (values) => {
+    const [, setUsersStorage] = useLocalStorage("listUsers", []);
+    const onSubmit = useCallback((values) => {
         dispatch({type: ADD_USER, payload: values});
-        // setListUsers((prevState) => { [...prevState, values] });
-    }
+        setUsersStorage((prevState) =>  [...prevState, values]);
+    }, [dispatch]);
 
     const { values, errors, touched, handleChange,handleBlur, handleSubmit} = useFormik({
         initialValues: {
