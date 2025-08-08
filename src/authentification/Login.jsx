@@ -6,18 +6,26 @@ import {schemaLoginSchema} from "../schemas/SchemaLogin";
 import {useTodoContext} from "../contexts/TodoProvider";
 import {SET_USER} from "../constants/actionTypes";
 import useSession from "../customsHooks/useSession";
-
+import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
+import {motion} from 'framer-motion';
 export const Login = React.memo(() => {
     const navigate = useNavigate();
     const [userSession, setUserSession] = useSession( "user", null);
     const {dispatch} = useTodoContext();
+    const {state} = useAuthenticationContext();
 
     const onSubmit = (values) => {
         const {identifier, password} = values;
-        if (identifier && identifier === 'user101' && password && password === 'Admin101') {
+
+        const existUser = state.listUsers.filter((user) => {
+            return user.identifier === identifier;
+        });
+        console.log(state.listUsers);
+        if (identifier && identifier === existUser[0]?.identifier && password && password === existUser[0]?.password) {
             const user = {identifier, password};
             setUserSession(user);
             dispatch({type: SET_USER, payload: userSession});
+            navigate('/');
         }
     }
 
@@ -36,15 +44,27 @@ export const Login = React.memo(() => {
             <div aria-label={"login-identifier"} className={styles.groupForm}>
                 <label htmlFor="identifier">Identifier</label>
                 <input type="text" id="identifier" className={errors.identifier ? styles.invalid : styles.valid} autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur}  placeholder="Identifier Name"/>
-                { errors.identifier && touched.identifier ? (<span>{errors.identifier}</span>) : null}
+                { errors.identifier && touched.identifier ? (<motion.span initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.identifier}</motion.span>) : null}
             </div>
             <div aria-label={"login-password"} className={styles.groupForm}>
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" className={errors.password ? styles.invalid : styles.valid} autoComplete={"current-password"} name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
-                { errors.password && touched.password ? (<span>{errors.password}</span>) : null}
+                { errors.password && touched.password ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.password}</motion.span>) : null}
             </div>
-            <button className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}>Login In</button>
-            <span>I want To Sing Up ?<span className={styles.link} onClick={() => navigate('/singUp')}>Sing Up</span></span>
+            <motion.button
+                whileHover={{
+                    marginTop: -5,
+                    backgroundColor: '#e3734d'
+                }}
+                initial={{
+                    scale: 1.05,
+                }}
+                animate={{
+                    scale: 1,
+                    transition: { duration: 0.5}
+                }}
+                className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}>Login In</motion.button>
+            <motion.span initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1, transition: {duration: 0.3}}}>I want To Sing Up ?<span className={styles.link} onClick={() => navigate('/signup')}>Sing Up</span></motion.span>
         </form>
         </>
     )

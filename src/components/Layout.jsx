@@ -3,6 +3,7 @@ import {Link, Outlet} from "react-router-dom";
 import styles from "../style/ModularStyle.module.scss";
 import {useTodoContext} from "../contexts/TodoProvider";
 import {NOT_FOUND, SET_USER} from "../constants/actionTypes";
+import {motion} from "framer-motion";
 
 export const Layout = React.memo(() => {
     const listNav = useRef(null);
@@ -34,13 +35,14 @@ export const Layout = React.memo(() => {
         <nav className={styles.navbar}>
             <ul ref={listNav}>
                 <li>
-                    <Link to="/home" onClick={handleClickedLink}>Home</Link>
+                    <Link to="/" onClick={handleClickedLink} className={`${styles.active}`}>Home</Link>
                 </li>
                 <li>
                     <Link to="/About" onClick={handleClickedLink}>About</Link>
                 </li>
             </ul>
-            {state.user ? <button className={styles.btnLogout} onClick={handleClick} aria-label={"button to logout form the todo-app"}>Logout</button> : null}
+            {state.user ? <motion.button className={styles.btnLogout} drag={'x'}  initial={{scale: 0}} animate={{scale: 1, translateY: '-50%', transition: {duration: 0.3}}} onClick={handleClick}
+                                  aria-label={"button to logout form the todo-app"}>Logout</motion.button> : null}
         </nav>
             <div>
                 <Outlet/>

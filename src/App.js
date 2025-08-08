@@ -7,6 +7,7 @@ import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes"
 import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
+import {motion} from "framer-motion";
 
 export const App = React.memo(() => {
     const { state, dispatch } = useTodoContext();
@@ -52,7 +53,7 @@ export const App = React.memo(() => {
     }, [state.globalTodos, state.startValue, state.nbElements, state.pagination]);
 
     return (
-       <section className={styles.container}>
+       <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
            <FormUI />
            <ul className={styles.todoList}>
                 { !state.loading ? <Suspense fallback={<Loader />} />
@@ -63,6 +64,6 @@ export const App = React.memo(() => {
                 }
             </ul>
             <PaginationForm />
-       </section>
+       </motion.section>
        );
 })

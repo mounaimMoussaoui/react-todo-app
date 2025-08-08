@@ -1,17 +1,20 @@
-import React, {useCallback, useEffect} from "react";
+import {motion} from 'framer-motion';
 import styles from "../style/ModularStyle.module.scss";
 import {useFormik} from "formik";
 import {SchemaSingUp} from "../schemas/SchemaSingUp";
 import {useNavigate} from "react-router-dom";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
-import {ADD_USER, SET_USER} from "../constants/actionTypes";
+import {ADD_USER} from "../constants/actionTypes";
+import React, {useEffect} from "react";
+import useLocalStorage from "../customsHooks/useLocalStorage";
 
 export const SingUp = React.memo(() => {
-    const {dispatch} = useAuthenticationContext();
+    const {state, dispatch} = useAuthenticationContext();
+    // const [listUsers, setListUsers] = useLocalStorage('listUsers', []);
     const navigate = useNavigate();
-
     const onSubmit = (values) => {
-        dispatch({type: SET_USER, payload: values});
+        dispatch({type: ADD_USER, payload: values});
+        // setListUsers((prevState) => { [...prevState, values] });
     }
 
     const { values, errors, touched, handleChange,handleBlur, handleSubmit} = useFormik({
@@ -27,7 +30,7 @@ export const SingUp = React.memo(() => {
     });
 
    return (<>
-       <h2 className={styles.titlePage}>Sing Up Page</h2>
+       <motion.h2 initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}} className={styles.titlePage}>Sing Up Page</motion.h2>
         <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
@@ -35,7 +38,7 @@ export const SingUp = React.memo(() => {
                       className={errors.identifier ? styles.invalid : styles.valid}
                       autoComplete={"username"} name="identifier" value={values.identifier}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
-               {errors.identifier && touched.identifier ? (<span>{errors.identifier}</span>) : null}
+               {errors.identifier && touched.identifier ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.identifier}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="FullName">Full Name</label>
@@ -43,7 +46,7 @@ export const SingUp = React.memo(() => {
                       className={errors.fullName ? styles.invalid : styles.valid} name="fullName"
                       value={values.fullName} onChange={handleChange}
                       onBlur={handleBlur} placeholder="Full Name"/>
-               {errors.fullName && touched.fullName ? (<span>{errors.fullName}</span>) : null}
+               {errors.fullName && touched.fullName ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.fullName}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="email">Email</label>
@@ -51,7 +54,7 @@ export const SingUp = React.memo(() => {
                       className={errors.email ? styles.invalid : styles.valid} name="email"
                       value={values.email}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
-               {errors.email && touched.email ? (<span>{errors.email}</span>) : null}
+               {errors.email && touched.email ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.email}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="password">Password</label>
@@ -59,7 +62,7 @@ export const SingUp = React.memo(() => {
                       className={errors.password ? styles.invalid : styles.valid}
                       autoComplete={"current-password"} name="password"
                       value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
-               {errors.password && touched.password ? (<span>{errors.password}</span>) : null}
+               {errors.password && touched.password ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.password}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="confirmPassword">Confirm Password</label>
@@ -68,13 +71,22 @@ export const SingUp = React.memo(() => {
                       autoComplete={"current-password"} name="confirmPassword"
                       value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}
                       placeholder="Confirm Password"/>
-               {errors.confirmPassword && touched.confirmPassword ? (<span>{errors.confirmPassword}</span>) : null}
+               {errors.confirmPassword && touched.confirmPassword ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.confirmPassword}</motion.span>) : null}
            </div>
-           <button className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}>Sing
+           <motion.button
+               whileHover={{
+                   scale: 1.05,
+                   backgroundColor: '#e3734d'
+               }}
+               initial={{scale: 1.5}}
+               animate={{
+                   scale: 1,
+                   transition: {duration: 0.5},
+               }}
+               className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}>Sing
                Up
-           </button>
+           </motion.button>
            <span>I'm Ready Have Account ?<span className={styles.link} onClick={() => navigate(-1)}>Login</span></span>
-
        </form>
    </>)
 });
