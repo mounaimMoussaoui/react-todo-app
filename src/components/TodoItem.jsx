@@ -8,7 +8,7 @@ import {
 } from "../constants/actionTypes";
 import React, {Suspense, useCallback, useRef, useState} from "react";
 import {Loader} from "./Loader";
-import {motion} from "framer-motion";
+import {motion, useDragControls} from "framer-motion";
 
 const AlertBox = React.lazy(() => import("./AlertBox"));
 
@@ -73,7 +73,7 @@ export const TodoItem = React.memo(({task, textDecoration}) => {
     }, [handleBtnEdite]);
 
     return (<>
-        <motion.li drag={'y'} className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
+        <motion.li  className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
             <input type="checkbox" className={styles['doneStyle']} data-id={task.id} name={"done"} onChange={handleDone} value={task.done} ref={checkDone} checked={task.done}/>
             <div className={styles['boxEditing']}>
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>

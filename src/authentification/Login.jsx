@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import styles from "../style/ModularStyle.module.scss";
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
@@ -16,19 +16,19 @@ export const Login = React.memo(() => {
     const {dispatch} = useTodoContext();
     const {state} = useAuthenticationContext();
 
-    const onSubmit = (values) => {
+    const onSubmit = useCallback((values) => {
         const {identifier, password} = values;
         const existUser = usersStorage.filter((user) => {
             return user.identifier === identifier;
         });
-        console.log(state.listUsers);
+        console.log(userSession);
         if (identifier && identifier === existUser[0]?.identifier && password && password === existUser[0]?.password) {
             const user = {identifier, password};
             setUserSession(user);
             dispatch({type: SET_USER, payload: userSession});
             navigate('/');
         }
-    }
+    }, [])
 
     const {values,  errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
         initialValues: {

@@ -7,7 +7,7 @@ import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes"
 import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
-import {motion} from "framer-motion";
+import {motion, useDragControls} from "framer-motion";
 
 export const App = React.memo(() => {
     const { state, dispatch } = useTodoContext();
@@ -55,14 +55,15 @@ export const App = React.memo(() => {
     return (
        <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
            <FormUI />
-           <ul className={styles.todoList}>
+           <motion.ul
+               className={styles.todoList}>
                 { !state.loading ? <Suspense fallback={<Loader />} />
                    : state.globalTodos.length > 0
                    ? visibleTodos.map((item) => {
-                        return <TodoItem task={item} key={item.id} textDecoration={item.done}/>
+                        return <TodoItem task={item} key={item.id} textDecoration={item.done} />
                     }) : "No Task Have Yet"
                 }
-            </ul>
+            </motion.ul>
             <PaginationForm />
        </motion.section>
        );
