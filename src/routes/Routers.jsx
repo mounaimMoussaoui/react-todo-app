@@ -40,6 +40,5 @@ export const Routes = React.memo(() => {
         },
         ]);
 
-    return <RouterProvider router={browserRoutes} /> 
-
+    return <RouterProvider router={browserRoutes} />
 })

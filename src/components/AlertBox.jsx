@@ -2,6 +2,7 @@ import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {REMOVE_TODO, SET_MESSAGE_VALUE} from "../constants/actionTypes";
 import React, {useCallback} from "react";
+import {motion} from "framer-motion";
 
 export default function AlertBox() {
 
@@ -17,7 +18,7 @@ export default function AlertBox() {
     }, [dispatch, state.idDel]);
 
     return (
-        <div className={styles['alertBox']}>
+        <motion.div drag={'x'} intail={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles['alertBox']}>
 
             <h4 className={styles['titleAlert']}>Title: Warning</h4>
 
@@ -30,6 +31,6 @@ export default function AlertBox() {
             <button className={`${styles['alertBtn']} ${styles['confirmation']}`}
                     onClick={() => handleConfirmation("yes")}>Yes
             </button>
-        </div>
+        </motion.div>
     )
 }

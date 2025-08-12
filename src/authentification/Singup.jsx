@@ -5,7 +5,7 @@ import {SchemaSingUp} from "../schemas/SchemaSingUp";
 import {useNavigate} from "react-router-dom";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
 import {ADD_USER} from "../constants/actionTypes";
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import useLocalStorage from "../customsHooks/useLocalStorage";
 
 export const SingUp = React.memo(() => {

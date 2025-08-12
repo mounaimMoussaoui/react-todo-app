@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useMemo} from "react";
+import React, {Suspense, useEffect, useMemo, useRef} from "react";
 import {FormUI} from "./components/FormUI";
 import {PaginationForm} from "./components/PaginationForm";
 import styles from "./style/ModularStyle.module.scss";
@@ -7,12 +7,17 @@ import {LOAD_DATA, SET_GLOBAL_TODOS, SET_LOADING} from "./constants/actionTypes"
 import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
-import {motion, useDragControls} from "framer-motion";
+import {motion} from "framer-motion";
+
+const AlertBox = React.lazy(() => import("./components/AlertBox"));
+
 
 export const App = React.memo(() => {
     const { state, dispatch } = useTodoContext();
 
     const [ todos, setTodos ] = useLocalStorage('todos', []);
+
+    const listTodos = useRef(null);
 
     useEffect(() => {
         try {
@@ -55,16 +60,17 @@ export const App = React.memo(() => {
     return (
        <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
            <FormUI />
-           <motion.ul
+           <motion.ul ref={listTodos}
                className={styles.todoList}>
                 { !state.loading ? <Suspense fallback={<Loader />} />
                    : state.globalTodos.length > 0
                    ? visibleTodos.map((item) => {
-                        return <TodoItem task={item} key={item.id} textDecoration={item.done} />
+                        return <TodoItem task={item} key={item.id} textDecoration={item.done} listTodos={listTodos} />
                     }) : "No Task Have Yet"
                 }
             </motion.ul>
             <PaginationForm />
+           { state.message ? <Suspense fallback={<Loader />}><AlertBox /></Suspense> : ""}
        </motion.section>
        );
 })

@@ -7,11 +7,11 @@ import {Routes} from "./routes/Routers";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <TodoProvider>
         <Routes />
     </TodoProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 reportWebVitals();

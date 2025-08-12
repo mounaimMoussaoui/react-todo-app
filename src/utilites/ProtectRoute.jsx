@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {useTodoContext} from "../contexts/TodoProvider";
-import {Login} from "../authentification/Login";
 import {useNavigate} from "react-router-dom";
 
 export const ProtectRoute = React.memo(({children}) => {

@@ -6,14 +6,10 @@ import {
     SET_MESSAGE_VALUE,
     SET_TITLE_VALUE
 } from "../constants/actionTypes";
-import React, {Suspense, useCallback, useRef, useState} from "react";
-import {Loader} from "./Loader";
-import {motion, useDragControls} from "framer-motion";
+import React, {useCallback, useRef, useState} from "react";
+import {motion} from "framer-motion";
 
-const AlertBox = React.lazy(() => import("./AlertBox"));
-
-
-export const TodoItem = React.memo(({task, textDecoration}) => {
+export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
     const { state, dispatch } = useTodoContext();
     const [showEditing, setShowEditing] = useState(false);
     const deleteBtn = useRef(null);
@@ -73,7 +69,7 @@ export const TodoItem = React.memo(({task, textDecoration}) => {
     }, [handleBtnEdite]);
 
     return (<>
-        <motion.li  className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
+        <motion.li drag dragConstraints={listTodos} className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
             <input type="checkbox" className={styles['doneStyle']} data-id={task.id} name={"done"} onChange={handleDone} value={task.done} ref={checkDone} checked={task.done}/>
             <div className={styles['boxEditing']}>
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>
@@ -84,7 +80,6 @@ export const TodoItem = React.memo(({task, textDecoration}) => {
             </div>
             <button className={`${styles['styleBtn']} ${styles['btnDelBackGround']}`} data-id={task.id} ref={deleteBtn} onClick={handleDel}>delete</button>
         </motion.li>
-        { state.message ? <Suspense fallback={<Loader />}><AlertBox /></Suspense> : ""}
     </>
     )
 });
