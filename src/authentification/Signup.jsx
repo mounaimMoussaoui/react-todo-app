@@ -8,7 +8,7 @@ import {ADD_USER} from "../constants/actionTypes";
 import React, {useCallback} from "react";
 import useLocalStorage from "../customsHooks/useLocalStorage";
 
-export const SingUp = React.memo(() => {
+export const Signup = React.memo(() => {
     const {dispatch} = useAuthenticationContext();
     const navigate = useNavigate();
     const [, setUsersStorage] = useLocalStorage("listUsers", []);

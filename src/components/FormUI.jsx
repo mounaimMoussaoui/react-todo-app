@@ -54,7 +54,7 @@ export const FormUI = React.memo(() => {
 
     const handleFiltered = useCallback(() => {
         dispatch({ type: FILTERED_TODOS, payload: filterField.current.value });
-    }, [dispatch]);
+    }, [dispatch, filterField?.current?.value]);
 
     const handleSearch = useCallback(() => {
         dispatch({type: SET_VALUE_SEARCH, payload: searchField.current.value});

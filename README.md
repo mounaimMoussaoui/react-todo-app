@@ -1,9 +1,3 @@
-# Authentication Data
-
-  - Identifier: user101
-  - Password: Admin
-
-
 # Todo-App With React JS
 
 a feature-rich to-do list built with React, Context API, useReducer, customs hooks, and scss Modules.

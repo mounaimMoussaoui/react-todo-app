@@ -11,7 +11,6 @@ import {motion} from "framer-motion";
 
 const AlertBox = React.lazy(() => import("./components/AlertBox"));
 
-
 export const App = React.memo(() => {
     const { state, dispatch } = useTodoContext();
 
@@ -21,8 +20,9 @@ export const App = React.memo(() => {
 
     useEffect(() => {
         try {
-            dispatch({type: LOAD_DATA, payload: todos })
             dispatch( {type: SET_LOADING, payload: true} );
+            dispatch({type: LOAD_DATA, payload: todos })
+            dispatch( {type: SET_LOADING, payload: false} );
         } catch {
             console.log("Error to loading todos");
         }
@@ -41,11 +41,18 @@ export const App = React.memo(() => {
     }, [state.todos, dispatch, setTodos]);
 
     const fltSerTodos = useMemo(() => {
-        return state.filter === "completed" ? todos.filter((todo) => todo.done === true)
-            : state.filter === 'active' ? todos.filter((todo) => todo.done === false) : state.search !== ""
-            ? todos.filter(todo => todo.title.toLowerCase().includes(state.search.toLowerCase())) : todos;
-
-    }, [todos, state.filter, state.search]);
+       if(state.filter === "completed") {
+           console.log(state.filter);
+            return todos.filter((todo) => todo.done === true);
+        } else if(state.filter === "active") {
+           console.log(state.filter);
+            return todos.filter((todo) => todo.done === false);
+        } else if(state.search !== "") {
+            return todos.filter(todo => todo.title.toLowerCase().includes(state.search.toLowerCase()))
+        } else {
+            return todos;
+        }
+    }, [state?.filter, state?.search]);
 
     useEffect(() => {
         dispatch( {type: SET_GLOBAL_TODOS, payload: fltSerTodos } );
@@ -53,24 +60,23 @@ export const App = React.memo(() => {
 
     const visibleTodos = useMemo( () => {
 
-        return state.globalTodos.slice(state.startValue + state.pagination, state.nbElements + state.pagination);
+        return Array.isArray(state.globalTodos) && state.globalTodos.slice(state.startValue + state.pagination, state.nbElements + state.pagination);
 
     }, [state.globalTodos, state.startValue, state.nbElements, state.pagination]);
 
     return (
        <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
            <FormUI />
-           <motion.ul ref={listTodos}
-               className={styles.todoList}>
-                { !state.loading ? <Suspense fallback={<Loader />} />
-                   : state.globalTodos.length > 0
-                   ? visibleTodos.map((item) => {
-                        return <TodoItem task={item} key={item.id} textDecoration={item.done} listTodos={listTodos} />
-                    }) : "No Task Have Yet"
-                }
-            </motion.ul>
+           <motion.ul ref={listTodos} className={styles.todoList}>
+               <Suspense fallback={<Loader />}>
+                   {visibleTodos.length > 0
+                       ? visibleTodos?.map((item) => {
+                           return <TodoItem task={item} key={item.id} textDecoration={item.done} listTodos={listTodos} />
+                       }) : "No Tasks Yet"}
+               </Suspense>
+           </motion.ul>
             <PaginationForm />
-           { state.message ? <Suspense fallback={<Loader />}><AlertBox /></Suspense> : ""}
+           { state.message ? <Suspense fallback={<Loader />}><AlertBox /></Suspense> : null}
        </motion.section>
        );
 })

@@ -5,7 +5,7 @@ import {App} from "../App";
 import {NotFoundPage} from "../components/NotFoundPage";
 import {Abouts} from "../components/Abouts";
 import {ProtectRoute} from "../utilites/ProtectRoute";
-import {SingUp} from "../authentification/Singup";
+import {Signup} from "../authentification/Signup";
 import AuthenticationProvider from "../contexts/AuthenticationProvider";
 import {Login} from "../authentification/Login";
 
@@ -13,7 +13,7 @@ export const Routes = React.memo(() => {
     const browserRoutes = createBrowserRouter([
         {
             path: '/signup',
-            element: <AuthenticationProvider> <SingUp/> </AuthenticationProvider>,
+            element: <AuthenticationProvider> <Signup/> </AuthenticationProvider>,
         },
 
         {

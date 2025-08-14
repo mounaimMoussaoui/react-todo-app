@@ -5,16 +5,15 @@ import {useNavigate} from "react-router-dom";
 export const ProtectRoute = React.memo(({children}) => {
     const {state} = useTodoContext();
     const navigate = useNavigate();
-    const user =  state.user;
 
-    console.log(user);
     useEffect(() => {
+        const user =  state.user;
 
         if(user === null) {
             navigate("/login");
         }
 
-    }, [navigate, user]);
+    }, [state.user]);
 
     return children
-})
+});
