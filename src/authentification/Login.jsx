@@ -6,9 +6,9 @@ import useSession from "../customsHooks/useSession";
 import {motion} from 'framer-motion';
 import useLocalStorage from "../customsHooks/useLocalStorage";
 import {useTodoContext} from "../contexts/TodoProvider";
-import {SET_USER} from "../constants/actionTypes";
+import {PUT_NOTIFICATION, SET_LOADING, SET_USER} from "../constants/actionTypes";
 import {schemaLoginSchema} from "../schemas/SchemaLogin";
-
+import { FaUserLock } from "react-icons/fa";
 export const Login = React.memo(() => {
     const navigate = useNavigate();
     const [usersStorage] = useLocalStorage('listUsers', []);
@@ -25,6 +25,7 @@ export const Login = React.memo(() => {
             setUserSession(user);
             dispatch({type: SET_USER, payload: userSession});
             navigate('/');
+            dispatch({type: PUT_NOTIFICATION, payload: `Welcome You're Login Now ${existUser.fullName}!!`});
         }
     }, []);
 
@@ -38,8 +39,11 @@ export const Login = React.memo(() => {
     });
 
     return (<>
-        <h2 className={styles.titlePage}>Authentication Page</h2>
-        <form onSubmit={handleSubmit} className={`${styles.container} ${styles.formContainer}`}>
+            <motion.div className={styles.headBox} initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}}>
+                <h2 className={styles.titlePage}>Authentication Page</h2>
+                <FaUserLock/>
+            </motion.div>
+            <form onSubmit={handleSubmit} className={`${styles.container} ${styles.formContainer}`}>
             <div aria-label={"login-identifier"} className={styles.groupForm}>
                 <label htmlFor="identifier">Identifier</label>
                 <input type="text" id="identifier" className={errors.identifier ? styles.invalid : styles.valid} autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>

@@ -15,7 +15,7 @@ import {
     SET_PAGINATION,
     SET_LOADING,
     SET_GLOBAL_TODOS,
-    SET_DELETED_ID, NOT_FOUND, SET_USER
+    SET_DELETED_ID, NOT_FOUND, SET_USER, PUT_NOTIFICATION
 } from "../constants/actionTypes";
 
 export default function reducer(state, action) {
@@ -103,6 +103,10 @@ export default function reducer(state, action) {
         case SET_USER: return {
             ...state,
             user: action.payload,
+        };
+        case PUT_NOTIFICATION: return  {
+            ...state,
+            notification: action.payload,
         }
         default: return state;
     }

@@ -7,6 +7,7 @@ import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
 import {ADD_USER} from "../constants/actionTypes";
 import React, {useCallback} from "react";
 import useLocalStorage from "../customsHooks/useLocalStorage";
+import {IoIosCreate} from "react-icons/io";
 
 export const Signup = React.memo(() => {
     const {dispatch} = useAuthenticationContext();
@@ -30,8 +31,11 @@ export const Signup = React.memo(() => {
     });
 
    return (<>
-       <motion.h2 initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}} className={styles.titlePage}>Sing Up Page</motion.h2>
-        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
+       <motion.div className={styles.headBox} initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}}>
+           <h2 className={styles.titlePage}>Sing Up Page</h2>
+           <IoIosCreate/>
+       </motion.div>
+       <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
                <input type="text" id="identifier"

@@ -3,7 +3,7 @@ import styles from "../style/ModularStyle.module.scss";
 import {
     ADD_TODO,
     CLEAN_TODOS_DONE,
-    FILTERED_TODOS, SET_TITLE_VALID,
+    FILTERED_TODOS, PUT_NOTIFICATION, SET_TITLE_VALID,
     SET_TITLE_VALUE,
     SET_VALUE_SEARCH,
     SORTED_LIST_TODO
@@ -49,6 +49,7 @@ export const FormUI = React.memo(() => {
     const handleCleanCompleted = useCallback((e) => {
         e.preventDefault();
         dispatch({type: CLEAN_TODOS_DONE});
+        dispatch({type: PUT_NOTIFICATION, payload: `Deletion Of Completed Tasks Completed Successfully`});
         resetField();
     }, [dispatch, resetField]);
 

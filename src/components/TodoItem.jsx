@@ -1,7 +1,7 @@
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {
-    EDIT_TODO, SET_DELETED_ID,
+    EDIT_TODO, PUT_NOTIFICATION, SET_DELETED_ID,
     SET_DONE, SET_EDITING_TITLE,
     SET_MESSAGE_VALUE,
     SET_TITLE_VALUE
@@ -48,10 +48,11 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
 
     const handleBtnEdite = useCallback(() => {
         const idTask = editBtn.current.dataset.id;
-        dispatch( {type: EDIT_TODO, payload: {id: +idTask, titleEditing: state.editTitle}} )
+        dispatch( {type: EDIT_TODO, payload: {id: +idTask, titleEditing: state.editTitle}});
         boxEdit.current.style.display = 'none';
         resetField();
         setShowEditing(false);
+        dispatch({type: PUT_NOTIFICATION, payload: `Task Update Successfully`});
     }, [dispatch, resetField, state.editTitle]);
 
     const handelKeyPressEditing = useCallback((e) => {

@@ -19,3 +19,5 @@ export const SET_USER = 'SET_USER';
 export const NOT_FOUND = 'NOT_FOUND';
 
 export const ADD_USER = "ADD_USER";
+
+export const PUT_NOTIFICATION = "PUT_NOTIFICATION";

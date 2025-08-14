@@ -8,6 +8,7 @@ import {Loader} from "./components/Loader";
 import useLocalStorage from "./customsHooks/useLocalStorage";
 import {TodoItem} from "./components/TodoItem";
 import {motion} from "framer-motion";
+import {NotificationBox} from "./components/NotificationBox";
 
 const AlertBox = React.lazy(() => import("./components/AlertBox"));
 
@@ -65,6 +66,7 @@ export const App = React.memo(() => {
 
     return (
        <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
+           { state.notification ? <NotificationBox /> : null }
            <FormUI />
            <motion.ul ref={listTodos} className={styles.todoList}>
                <Suspense fallback={<Loader />}>
