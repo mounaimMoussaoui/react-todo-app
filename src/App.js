@@ -42,7 +42,6 @@ export const App = React.memo(() => {
 
     const fltSerTodos = useMemo(() => {
        if(state.filter === "completed") {
-           console.log(state.filter);
             return todos.filter((todo) => todo.done === true);
         } else if(state.filter === "active") {
            console.log(state.filter);
