@@ -12,10 +12,13 @@ import {Login} from "../authentification/Login";
 export const Routes = React.memo(() => {
     const browserRoutes = createBrowserRouter([
         {
-            path: '/signup',
-            element: <AuthenticationProvider> <Signup/> </AuthenticationProvider>,
+            path: '/login',
+            element: <AuthenticationProvider><Login/></AuthenticationProvider>,
         },
-
+        {
+            path: '/signup',
+            element: <AuthenticationProvider> <Signup/></AuthenticationProvider>,
+        },
         {
             path: '/',
             element: <ProtectRoute><Layout /></ProtectRoute>,
@@ -29,10 +32,6 @@ export const Routes = React.memo(() => {
                     element: <Abouts />,
                 },
             ]
-        },
-        {
-            path: '/login',
-            element: <AuthenticationProvider><Login/> </AuthenticationProvider>,
         },
         {
             path: '*',

@@ -53,14 +53,14 @@ export const Login = React.memo(() => {
             <form onSubmit={handleSubmit} className={`${styles.container} ${styles.formContainer}`}>
             <div aria-label={"login-identifier"} className={styles.groupForm}>
                 <label htmlFor="identifier">Identifier</label>
-                <input type="text" id="identifier" className={errors.identifier ? styles.invalid : styles.valid} autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
-                {errors.identifier   ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-                { errors.identifier  ? (<motion.span initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.identifier}</motion.span>) : null}
+                <input type="text" id="identifier" className={errors.identifier && touched.identifier ? styles.invalid : styles.valid} autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
+                { errors.identifier && touched.identifier ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
+                { errors.identifier && touched.identifier  ? (<motion.span initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.identifier}</motion.span>) : null}
             </div>
             <div aria-label={"login-password"} className={styles.groupForm}>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" className={errors.password ? styles.invalid : styles.valid} autoComplete={"current-password"} name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
-                {errors.password ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
+                <input type="password" id="password" className={errors.password && touched.password ? styles.invalid : styles.valid} autoComplete={"current-password"} name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
+                { errors.password && touched.password ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
                 { errors.password && touched.password ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.password}</motion.span>) : null}
             </div>
             <motion.button
