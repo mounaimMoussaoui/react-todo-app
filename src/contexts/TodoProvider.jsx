@@ -8,7 +8,7 @@ export default function TodoProvider({ children }) {
         user: null,
         nbElements: 5,
         startValue: 0,
-        notification: "dd",
+        notification: null,
         title: '',
         titleValid: undefined,
         search: '',

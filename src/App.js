@@ -25,7 +25,7 @@ export const App = React.memo(() => {
             dispatch({type: LOAD_DATA, payload: todos })
             dispatch( {type: SET_LOADING, payload: false} );
         } catch {
-            console.log("Error to loading todos");
+            console.log("Error loading todos");
         }
         // eslint-disable-next-line
     }, []);
@@ -45,7 +45,6 @@ export const App = React.memo(() => {
        if(state.filter === "completed") {
             return todos.filter((todo) => todo.done === true);
         } else if(state.filter === "active") {
-           console.log(state.filter);
             return todos.filter((todo) => todo.done === false);
         } else if(state.search !== "") {
             return todos.filter(todo => todo.title.toLowerCase().includes(state.search.toLowerCase()))

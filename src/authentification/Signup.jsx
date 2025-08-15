@@ -4,18 +4,24 @@ import {useFormik} from "formik";
 import {SchemaSingUp} from "../schemas/SchemaSingUp";
 import {useNavigate} from "react-router-dom";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
-import {ADD_USER} from "../constants/actionTypes";
+import {ADD_USER, PUT_NOTIFICATION} from "../constants/actionTypes";
 import React, {useCallback} from "react";
 import useLocalStorage from "../customsHooks/useLocalStorage";
 import {IoIosCreate} from "react-icons/io";
+import {useTodoContext} from "../contexts/TodoProvider";
+import {NotificationBox} from "../components/NotificationBox";
 
 export const Signup = React.memo(() => {
     const {dispatch} = useAuthenticationContext();
+    const {state, dispatch: dispatchTodo} = useTodoContext();
     const navigate = useNavigate();
     const [, setUsersStorage] = useLocalStorage("listUsers", []);
+
     const onSubmit = useCallback((values) => {
         dispatch({type: ADD_USER, payload: values});
         setUsersStorage((prevState) =>  [...prevState, values]);
+        dispatchTodo({type: PUT_NOTIFICATION, payload: `${values.fullName} Your Account Create Successfully`});
+        setTimeout(() => navigate("/login"), 1500);
     }, [dispatch]);
 
     const { values, errors, touched, handleChange,handleBlur, handleSubmit} = useFormik({
@@ -31,6 +37,7 @@ export const Signup = React.memo(() => {
     });
 
    return (<>
+       { state.notification ? <NotificationBox /> : null }
        <motion.div className={styles.headBox} initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}}>
            <h2 className={styles.titlePage}>Sing Up Page</h2>
            <IoIosCreate/>

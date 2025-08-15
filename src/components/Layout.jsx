@@ -4,8 +4,10 @@ import styles from "../style/ModularStyle.module.scss";
 import {useTodoContext} from "../contexts/TodoProvider";
 import {NOT_FOUND, SET_USER} from "../constants/actionTypes";
 import {motion} from "framer-motion";
+import useSession from "../customsHooks/useSession";
 
 export const Layout = React.memo(() => {
+    const [, setUserSession] = useSession( "user", null);
     const listNav = useRef(null);
     const {state, dispatch} = useTodoContext();
 
@@ -27,6 +29,7 @@ export const Layout = React.memo(() => {
 
     const handleClick = useCallback(() => {
         dispatch({type: SET_USER, payload: null});
+        setUserSession(null);
     }, []);
 
 
