@@ -21,7 +21,7 @@ export const Routes = React.memo(() => {
                     element:  <App/>  ,
                 },
                 {
-                    path: '/about',
+                    path: '/About',
                     element: <Abouts />,
                 },
             ]

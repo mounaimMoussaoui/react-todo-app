@@ -7,7 +7,6 @@ export const ProtectRoute = React.memo(({children}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(user);
         if(user === null) {
             navigate("/login");
         }
