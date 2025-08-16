@@ -5,9 +5,7 @@ import {useTodoContext} from "../contexts/TodoProvider";
 import {NOT_FOUND} from "../constants/actionTypes";
 import {motion} from "framer-motion";
 import useSession from "../customsHooks/useSession";
-import { FaHome } from "react-icons/fa";
-import { FaInfo } from "react-icons/fa";
-
+import { FaHome,FaInfo } from "react-icons/fa";
 
 
 export const Layout = React.memo(() => {
@@ -27,7 +25,7 @@ export const Layout = React.memo(() => {
 
     const handleClickedLink = useCallback((e) => {
         for (let i = 0; i < listNav.current.children.length; i++) {
-            listNav.current.children[i].children[0].className = "";
+            listNav.current.children[i].children[1].className = "";
         }
             e.currentTarget.className = `${styles.active}`;
     }, [listNav]);
