@@ -6,6 +6,7 @@ import {NOT_FOUND} from "../constants/actionTypes";
 import {motion} from "framer-motion";
 import useSession from "../customsHooks/useSession";
 import { FaHome,FaInfo } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
 
 
 export const Layout = React.memo(() => {
@@ -50,7 +51,7 @@ export const Layout = React.memo(() => {
                 </li>
             </ul>
             {userSession ? <motion.button className={styles.btnLogout} drag={'x'}  initial={{scale: 0}} animate={{scale: 1, translateY: '-50%', transition: {duration: 0.3}}} whileTap={{y:-5, scale: 0.9}} onClick={handleClick}
-                                  aria-label={"button to logout form the todo-app"}>Logout</motion.button> : null}
+                                  aria-label={"button to logout form the todo-app"}> <CiLogout /> <span>Logout</span> </motion.button> : null}
         </nav>
             <div>
                 <Outlet/>

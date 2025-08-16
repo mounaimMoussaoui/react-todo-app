@@ -9,7 +9,8 @@ import {
     SORTED_LIST_TODO
 } from "../constants/actionTypes";
 import React, {useCallback, useRef} from "react";
-
+import { MdAddTask, MdOutlineSort } from "react-icons/md";
+import { GoTrash } from "react-icons/go";
 export const FormUI = React.memo(() => {
 
     const { state, dispatch } = useTodoContext();
@@ -88,10 +89,10 @@ export const FormUI = React.memo(() => {
                 <option value='active'>Active</option>
             </select>
         </div>
-        <button className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"}>Add New Task</button>
+        <button className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"}> <MdAddTask /><span>Add New Task</span></button>
 
-        <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}>Sort by Status</button>
+        <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}><MdOutlineSort /><span>Sort by Status</span></button>
 
-        <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}>Clean Completed</button>
+        <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}><GoTrash /><span>Clean Completed</span></button>
     </form>)
 })

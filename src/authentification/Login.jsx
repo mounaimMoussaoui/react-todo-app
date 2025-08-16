@@ -10,8 +10,8 @@ import {PUT_NOTIFICATION} from "../constants/actionTypes";
 import {schemaLoginSchema} from "../schemas/SchemaLogin";
 import { FaUserLock } from "react-icons/fa";
 import {NotificationBox} from "../components/NotificationBox";
-import { FaTimes } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa6";
+import { FaTimes, FaCheck } from "react-icons/fa";
+import { IoIosLogIn } from "react-icons/io";
 export const Login = React.memo(() => {
     const navigate = useNavigate();
     const [usersStorage] = useLocalStorage('listUsers', []);
@@ -81,7 +81,7 @@ export const Login = React.memo(() => {
                 whileTap={{
                     scale: 0.9,
                 }}
-                className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}>Login In</motion.button>
+                className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}> <IoIosLogIn/> <span>Login In</span></motion.button>
             <motion.span initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1, transition: {duration: 0.3}}} exit={{opacity: 0}}>I want to Sign Up?<span className={styles.link} onClick={() => navigate('/signup')} >Sing Up</span></motion.span>
         </form>
         </>

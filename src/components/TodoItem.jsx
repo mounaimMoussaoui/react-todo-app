@@ -8,6 +8,8 @@ import {
 } from "../constants/actionTypes";
 import React, {useCallback, useRef, useState} from "react";
 import {motion} from "framer-motion";
+import { GoTrash } from "react-icons/go";
+import { CiEdit } from "react-icons/ci";
 
 export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
     const { state, dispatch } = useTodoContext();
@@ -76,10 +78,10 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>
                 <div className={`${styles['alertElementEditing']} ${showEditing && 'show'}`} ref={boxEdit}>
                     <input type="text" name={"titleOnEditing"} value={state.editTitle} ref={editField} onChange={handleEditingField} className={styles['inputStyleEditing']} data-id={task.id} onKeyDown={handelKeyPressEditing} onBlur={handleOutSideClick}/>
-                    <button data-id={task.id} className={`${styles['styleBtn']} ${styles['btnEditBackGround']}`} ref={editBtn} onClick={handleBtnEdite}>Edit</button>
+                    <button data-id={task.id} className={`${styles['styleBtn']} ${styles['btnEditBackGround']}`} ref={editBtn} onClick={handleBtnEdite}><CiEdit /><span>Edit</span></button>
                 </div>
             </div>
-            <button className={`${styles['styleBtn']} ${styles['btnDelBackGround']}`} data-id={task.id} ref={deleteBtn} onClick={handleDel}>delete</button>
+            <button className={`${styles['styleBtn']} ${styles['btnDelBackGround']}`} data-id={task.id} ref={deleteBtn} onClick={handleDel}><GoTrash /><span>delete</span></button>
         </motion.li>
     </>
     )
