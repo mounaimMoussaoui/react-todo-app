@@ -100,10 +100,6 @@ export default function reducer(state, action) {
             ...state,
             inNotFonded: action.payload,
         };
-        case SET_USER: return {
-            ...state,
-            user: action.payload,
-        };
         case PUT_NOTIFICATION: return  {
             ...state,
             notification: action.payload,

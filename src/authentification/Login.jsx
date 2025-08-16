@@ -6,7 +6,7 @@ import useSession from "../customsHooks/useSession";
 import {motion} from 'framer-motion';
 import useLocalStorage from "../customsHooks/useLocalStorage";
 import {useTodoContext} from "../contexts/TodoProvider";
-import {PUT_NOTIFICATION, SET_USER} from "../constants/actionTypes";
+import {PUT_NOTIFICATION} from "../constants/actionTypes";
 import {schemaLoginSchema} from "../schemas/SchemaLogin";
 import { FaUserLock } from "react-icons/fa";
 import {NotificationBox} from "../components/NotificationBox";
@@ -15,7 +15,7 @@ import { FaCheck } from "react-icons/fa6";
 export const Login = React.memo(() => {
     const navigate = useNavigate();
     const [usersStorage] = useLocalStorage('listUsers', []);
-    const [userSession, setUserSession] = useSession( "user", null);
+    const [, setUserSession] = useSession( "user", null);
     const {state, dispatch} = useTodoContext();
 
     const onSubmit = useCallback((values) => {
@@ -24,14 +24,17 @@ export const Login = React.memo(() => {
             return user.identifier === identifier;
         });
 
-        existUser !== null && setUserSession({identifier, password});
-        existUser !== null && dispatch({type: SET_USER, payload: userSession});
+        if(existUser.length === 0) {
+            dispatch({type: PUT_NOTIFICATION, payload: `Oops: Your Don't Have Account Signing Up First`});
+            return 0;
+        }
 
         if (identifier && identifier === existUser[0]?.identifier && password && password === existUser[0]?.password) {
+            setUserSession({identifier, password});
             dispatch({type: PUT_NOTIFICATION, payload: `Welcome You're Login Now ${existUser[0].fullName}!!`});
             navigate('/');
         } else {
-            dispatch({type: PUT_NOTIFICATION, payload: `Password Or Identifier Is Incorrect`});
+            dispatch({type: PUT_NOTIFICATION, payload: `Password Or Identifier Is Incorrect`})
         }
     }, []);
 
@@ -74,6 +77,9 @@ export const Login = React.memo(() => {
                 animate={{
                     scale: 1,
                     transition: { duration: 0.5}
+                }}
+                whileTap={{
+                    scale: 0.9,
                 }}
                 className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}>Login In</motion.button>
             <motion.span initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1, transition: {duration: 0.3}}} exit={{opacity: 0}}>I want to Sign Up?<span className={styles.link} onClick={() => navigate('/signup')} >Sing Up</span></motion.span>

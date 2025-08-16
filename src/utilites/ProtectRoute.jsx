@@ -1,19 +1,18 @@
 import React, {useEffect} from "react";
-import {useTodoContext} from "../contexts/TodoProvider";
 import {useNavigate} from "react-router-dom";
+import useSession from "../customsHooks/useSession";
 
 export const ProtectRoute = React.memo(({children}) => {
-    const {state} = useTodoContext();
+    const [user] = useSession("user", null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const user =  state.user;
-
+        console.log(user);
         if(user === null) {
             navigate("/login");
         }
 
-    }, [state.user]);
+    }, [user]);
 
     return children
 });

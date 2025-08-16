@@ -5,7 +5,6 @@ export const TodoContext = createContext();
 export default function TodoProvider({ children }) {
 
     const initialState = {
-        user: null,
         nbElements: 5,
         startValue: 0,
         notification: null,
