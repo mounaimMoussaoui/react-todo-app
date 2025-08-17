@@ -77,7 +77,7 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
             <div className={styles['boxEditing']}>
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>
                 <div className={`${styles['alertElementEditing']} ${showEditing && 'show'}`} ref={boxEdit}>
-                    <input type="text" name={"titleOnEditing"} value={state.editTitle} ref={editField} onChange={handleEditingField} className={styles['inputStyleEditing']} data-id={task.id} placeholder={"Task Title"} onKeyDown={handelKeyPressEditing} onBlur={handleOutSideClick}/>
+                    <input type="text" name={"titleOnEditing"} value={state.editTitle} ref={editField} onChange={handleEditingField} className={styles['inputStyleEditing']} data-id={task.id} placeholder={"Task Title On Editing...."} onKeyDown={handelKeyPressEditing} onBlur={handleOutSideClick}/>
                     <button data-id={task.id} className={`${styles['styleBtn']} ${styles['btnEditBackGround']}`} ref={editBtn} onClick={handleBtnEdite}><CiEdit /><span>Edit</span></button>
                 </div>
             </div>

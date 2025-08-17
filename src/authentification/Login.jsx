@@ -68,7 +68,6 @@ export const Login = React.memo(() => {
             </div>
             <motion.button
                 whileHover={{
-                    marginTop: -5,
                     backgroundColor: '#042f32'
                 }}
                 initial={{

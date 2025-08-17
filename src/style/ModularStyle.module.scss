@@ -174,11 +174,12 @@
 }
 
  .inputStyleEditing  {
-  padding:  12px 24px;
-  border-radius:  5px;
-  flex-grow: 1;
+   padding:  12px 24px;
+   border-radius:  5px;
+   flex-grow: 1;
    border: none;
    outline: none;
+   box-shadow: 0 1px 1px var(--black), inset 0 1px 2px var(--white);
 }
 
  .alertElementEditing  {
@@ -438,9 +439,21 @@
 
  .containerNotFound {
    display: flex;
+   cursor: pointer;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
    padding:  150px 25px;
+   gap: 15px;
+   .iconsError {
+     font-size:  10em;
+     color: var(--white);
+     filter: drop-shadow(5px 0px 5px var(--black));
+     transition: 0.3s ease-in-out;
+   }
+  &:hover .iconsError {
+    filter: drop-shadow(0 0 5px var(--primary));
+  }
  }
 
  .notFound {
