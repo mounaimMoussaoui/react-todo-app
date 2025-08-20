@@ -24,15 +24,15 @@ export const Layout = React.memo(() => {
         }
     }, [state]);
 
-    const handleClickedLink = useCallback((e) => {
+    const handleClickedLink = useCallback( (e) => {
         for (let i = 0; i < listNav.current.children.length; i++) {
             listNav.current.children[i].children[1].className = "";
         }
             e.currentTarget.className = `${styles.active}`;
     }, [listNav]);
 
-    const handleClick = useCallback(() => {
-        setUserSession(null);
+    const handleClick = useCallback(async () => {
+        await setUserSession(null);
         navigate("/login");
     }, []);
 

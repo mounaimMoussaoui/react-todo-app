@@ -15,7 +15,7 @@ import {
     SET_PAGINATION,
     SET_LOADING,
     SET_GLOBAL_TODOS,
-    SET_DELETED_ID, NOT_FOUND, SET_USER, PUT_NOTIFICATION
+    SET_DELETED_ID, NOT_FOUND, PUT_NOTIFICATION
 } from "../constants/actionTypes";
 
 export default function reducer(state, action) {

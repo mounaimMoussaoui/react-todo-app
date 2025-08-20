@@ -1,15 +1,15 @@
 import React, {useCallback} from "react";
 import styles from "../style/ModularStyle.module.scss";
-import {useNavigate} from "react-router-dom";
-import {useFormik} from "formik";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 import useSession from "../customsHooks/useSession";
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import useLocalStorage from "../customsHooks/useLocalStorage";
-import {useTodoContext} from "../contexts/TodoProvider";
-import {PUT_NOTIFICATION} from "../constants/actionTypes";
-import {schemaLoginSchema} from "../schemas/SchemaLogin";
+import { useTodoContext } from "../contexts/TodoProvider";
+import { PUT_NOTIFICATION } from "../constants/actionTypes";
+import { schemaLoginSchema } from "../schemas/SchemaLogin";
 import { FaUserLock } from "react-icons/fa";
-import {NotificationBox} from "../components/NotificationBox";
+import { NotificationBox } from "../components/NotificationBox";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { IoIosLogIn } from "react-icons/io";
 export const Login = React.memo(() => {
@@ -18,7 +18,7 @@ export const Login = React.memo(() => {
     const [, setUserSession] = useSession( "user", null);
     const {state, dispatch} = useTodoContext();
 
-    const onSubmit = useCallback((values) => {
+    const onSubmit = useCallback(async (values) => {
         const {identifier, password} = values;
         const existUser = usersStorage.filter((user) => {
             return user.identifier === identifier;
@@ -30,12 +30,13 @@ export const Login = React.memo(() => {
         }
 
         if (identifier && identifier === existUser[0]?.identifier && password && password === existUser[0]?.password) {
-            setUserSession({identifier, password});
+            await setUserSession({identifier, password});
             dispatch({type: PUT_NOTIFICATION, payload: `Welcome You're Login Now ${existUser[0].fullName}!!`});
             navigate('/');
         } else {
-            dispatch({type: PUT_NOTIFICATION, payload: `Password Or Identifier Is Incorrect`})
+            dispatch({type: PUT_NOTIFICATION, payload: `Password Or Identifier Is Incorrect`});
         }
+        //eslint-disable-next-line
     }, []);
 
     const {values,  errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
@@ -80,7 +81,7 @@ export const Login = React.memo(() => {
                 whileTap={{
                     scale: 0.9,
                 }}
-                className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} type={"submit"}> <IoIosLogIn/> <span>Login In</span></motion.button>
+                className={styles.styleBtn} aria-label={'Login in to the todo Using your identifier and password'} data-testid={"login"} type={"submit"}> <IoIosLogIn/> <span>Login In</span></motion.button>
             <motion.span initial={{scale: 0.7, opacity: 0}} animate={{scale: 1, opacity: 1, transition: {duration: 0.3}}} exit={{opacity: 0}}>I want to Sign Up?<span className={styles.link} onClick={() => navigate('/signup')} >Sing Up</span></motion.span>
         </form>
         </>

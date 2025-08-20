@@ -37,7 +37,13 @@ export const Routes = React.memo(() => {
             path: '*',
             element: <NotFoundPage />,
         }
-        ]);
+        ],
+    {
+            future: {
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+            },
+    });
 
     return <RouterProvider router={browserRoutes} />
 })

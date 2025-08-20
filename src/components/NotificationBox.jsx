@@ -11,16 +11,16 @@ export const NotificationBox = React.memo(() => {
     const {state, dispatch} = useTodoContext();
     const handleClick = useCallback(() => {
         dispatch({type: PUT_NOTIFICATION, payload: null});
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setTimeout(() => {
             dispatch({type: PUT_NOTIFICATION, payload: null});
         }, 3000);
-    }, []);
+    }, [dispatch]);
 
     return  (
-        <motion.div initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10, transition: {duration: 0.3}}} exit={{opacity: 0, Y: -100}} className={styles.notificationBox} >
+        <motion.div initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10, transition: {duration: 0.3}}} className={styles.notificationBox} >
             <IoMdNotificationsOutline />
             <span>{state.notification}</span>
             <TiTimesOutline onClick={handleClick} />
