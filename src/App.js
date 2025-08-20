@@ -27,7 +27,7 @@ export const App = React.memo(() => {
         } catch {
             console.log("Error loading todos");
         }
-        // eslint-disable-next-line
+    // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -51,6 +51,7 @@ export const App = React.memo(() => {
         } else {
             return todos;
         }
+   //eslint-disable-next-line
     }, [state?.filter, state?.search]);
 
     useEffect(() => {

@@ -10,7 +10,7 @@ export const ProtectRoute = React.memo(({children}) => {
         if(user === null) {
             navigate("/login");
         }
-
+    //eslint-disable-next-line
     }, [user]);
 
     return children

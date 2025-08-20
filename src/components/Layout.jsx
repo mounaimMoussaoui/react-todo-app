@@ -22,6 +22,7 @@ export const Layout = React.memo(() => {
             }
             dispatch({type: NOT_FOUND, payload: false});
         }
+    //eslint-disable-next-line
     }, [state]);
 
     const handleClickedLink = useCallback( (e) => {
@@ -34,6 +35,7 @@ export const Layout = React.memo(() => {
     const handleClick = useCallback(async () => {
         await setUserSession(null);
         navigate("/login");
+    //eslint-disable-next-line
     }, []);
 
 
