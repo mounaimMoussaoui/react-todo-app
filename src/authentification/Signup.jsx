@@ -20,6 +20,7 @@ export const Signup = React.memo(() => {
     const [, setUsersStorage] = useLocalStorage("listUsers", []);
 
     const onSubmit = useCallback((values) => {
+        console.log("Clcik And Entred To Here");
         dispatch({type: ADD_USER, payload: values});
         setUsersStorage((prevState) =>  [...prevState, values]);
         dispatchTodo({type: PUT_NOTIFICATION, payload: `${values.fullName} Your Account Create Successfully`});
@@ -39,7 +40,7 @@ export const Signup = React.memo(() => {
         onSubmit,
     });
 
-   return (<>
+   return (<section data-testid={"Signup"}>
        { state.notification ? <NotificationBox /> : null }
        <motion.div className={styles.headBox} initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}}>
            <h2 className={styles.titlePage}>Sing Up Page</h2>
@@ -48,7 +49,7 @@ export const Signup = React.memo(() => {
        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
-               <input type="text" id="identifier"
+               <input type="text" id="identifier" data-testid={"identifier"}
                       className={errors.identifier ? styles.invalid : styles.valid}
                       autoComplete={"username"} name="identifier" value={values.identifier}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
@@ -57,7 +58,7 @@ export const Signup = React.memo(() => {
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="FullName">Full Name</label>
-               <input type="text" id="FullName"
+               <input type="text" id="FullName" data-testid={"fullName"}
                       className={errors.fullName ? styles.invalid : styles.valid} name="fullName"
                       value={values.fullName} onChange={handleChange}
                       onBlur={handleBlur} placeholder="Full Name"/>
@@ -66,7 +67,7 @@ export const Signup = React.memo(() => {
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="email">Email</label>
-               <input type="email" autoComplete={"email"} id="email"
+               <input type="email" autoComplete={"email"} id="email" data-testid={"email"}
                       className={errors.email ? styles.invalid : styles.valid} name="email"
                       value={values.email}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
@@ -75,7 +76,7 @@ export const Signup = React.memo(() => {
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="password">Password</label>
-               <input type="password" id="password"
+               <input type="password" id="password" data-testid={"password"}
                       className={errors.password ? styles.invalid : styles.valid}
                       autoComplete={"current-password"} name="password"
                       value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
@@ -84,7 +85,7 @@ export const Signup = React.memo(() => {
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="confirmPassword">Confirm Password</label>
-               <input type="password" id="confirmPassword"
+               <input type="password" id="confirmPassword" data-testid={"confirmPassword"}
                       className={errors.confirmPassword ? styles.invalid : styles.valid}
                       autoComplete={"current-password"} name="confirmPassword"
                       value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}
@@ -101,9 +102,11 @@ export const Signup = React.memo(() => {
                whileTap={{
                    scale: 0.9,
                }}
+               role={"button"}
+               data-testid={"SignupBtn"}
                className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}><VscSignIn /><span>Sing Up</span>
            </motion.button>
            <span>I'm Ready Have Account ?<span className={styles.link} onClick={() => navigate(-1)}>Login</span></span>
        </form>
-   </>)
+   </section>)
 });
