@@ -50,7 +50,7 @@ export const Signup = React.memo(() => {
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="identifier">Identifier</label>
                <input type="text" id="identifier" data-testid={"identifier"}
-                      className={errors.identifier ? styles.invalid : styles.valid}
+                      className={errors.identifier && touched.identifier ? styles.invalid : styles.valid}
                       autoComplete={"username"} name="identifier" value={values.identifier}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
                { errors.identifier && touched.identifier ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
@@ -59,7 +59,7 @@ export const Signup = React.memo(() => {
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="FullName">Full Name</label>
                <input type="text" id="FullName" data-testid={"fullName"}
-                      className={errors.fullName ? styles.invalid : styles.valid} name="fullName"
+                      className={errors.fullName && touched.fullName ? styles.invalid : styles.valid} name="fullName"
                       value={values.fullName} onChange={handleChange}
                       onBlur={handleBlur} placeholder="Full Name"/>
                { errors.fullName && touched.fullName ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
@@ -68,7 +68,7 @@ export const Signup = React.memo(() => {
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="email">Email</label>
                <input type="email" autoComplete={"email"} id="email" data-testid={"email"}
-                      className={errors.email ? styles.invalid : styles.valid} name="email"
+                      className={errors.email && touched.email ? styles.invalid : styles.valid} name="email"
                       value={values.email}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
                { errors.email && touched.email ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
@@ -77,7 +77,7 @@ export const Signup = React.memo(() => {
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="password">Password</label>
                <input type="password" id="password" data-testid={"password"}
-                      className={errors.password ? styles.invalid : styles.valid}
+                      className={errors.password && touched.password ? styles.invalid : styles.valid}
                       autoComplete={"current-password"} name="password"
                       value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
                { errors.password && touched.password ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
@@ -86,7 +86,7 @@ export const Signup = React.memo(() => {
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="confirmPassword">Confirm Password</label>
                <input type="password" id="confirmPassword" data-testid={"confirmPassword"}
-                      className={errors.confirmPassword ? styles.invalid : styles.valid}
+                      className={errors.confirmPassword && touched.confirmPassword ? styles.invalid : styles.valid}
                       autoComplete={"current-password"} name="confirmPassword"
                       value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}
                       placeholder="Confirm Password"/>

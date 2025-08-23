@@ -13,17 +13,8 @@ import { NotificationBox } from "../components/NotificationBox";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { IoIosLogIn } from "react-icons/io";
 export const Login = React.memo(() => {
-
-    const user100 = {
-        identifier: "@Admin123",
-        fullName: "Falih Hamid",
-        email: "mails01@mail.com",
-        password: "QAZ123qaz",
-        confirmPassword: "QAZ123qaz",
-    }
-
     const navigate = useNavigate();
-    const [usersStorage] = useLocalStorage('listUsers', [user100]);
+    const [usersStorage] = useLocalStorage('listUsers', []);
     const [, setUserSession] = useSession( "user", null);
     const {state, dispatch} = useTodoContext();
 
