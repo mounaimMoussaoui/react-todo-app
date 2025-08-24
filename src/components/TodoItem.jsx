@@ -1,7 +1,7 @@
 import {useTodoContext} from "../contexts/TodoProvider";
 import styles from "../style/ModularStyle.module.scss";
 import {
-    EDIT_TODO, PUT_NOTIFICATION, SET_DELETED_ID,
+    EDIT_TODO, FILTERED_TODOS, PUT_NOTIFICATION, SET_DELETED_ID,
     SET_DONE, SET_EDITING_TITLE,
     SET_MESSAGE_VALUE,
     SET_TITLE_VALUE
@@ -23,8 +23,9 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
 
     const resetField = useCallback(() => {
         dispatch({type: SET_TITLE_VALUE, payload: ''});
-        state.filter = "all";
-    }, [dispatch, state]);
+        dispatch({type: FILTERED_TODOS, payload: 'all'})
+        // state.filter = "all";
+    }, [dispatch]);
 
     const handleDel = useCallback((e) => {
         e.preventDefault();

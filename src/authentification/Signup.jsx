@@ -20,7 +20,6 @@ export const Signup = React.memo(() => {
     const [, setUsersStorage] = useLocalStorage("listUsers", []);
 
     const onSubmit = useCallback((values) => {
-        console.log("Clcik And Entred To Here");
         dispatch({type: ADD_USER, payload: values});
         setUsersStorage((prevState) =>  [...prevState, values]);
         dispatchTodo({type: PUT_NOTIFICATION, payload: `${values.fullName} Your Account Create Successfully`});
@@ -43,7 +42,7 @@ export const Signup = React.memo(() => {
    return (<section data-testid={"Signup"}>
        { state.notification ? <NotificationBox /> : null }
        <motion.div className={styles.headBox} initial={{color: '#eee'}} animate={{color: '#222', transition: {duration: 0.5}}}>
-           <h2 className={styles.titlePage}>Sing Up Page</h2>
+           <h2 className={styles.titlePage}>Sign Up Page</h2>
            <IoIosCreate/>
        </motion.div>
        <form className={`${styles.container} ${styles.formContainer}`} onSubmit={handleSubmit}>
@@ -54,7 +53,7 @@ export const Signup = React.memo(() => {
                       autoComplete={"username"} name="identifier" value={values.identifier}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
                { errors.identifier && touched.identifier ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-               { errors.identifier && touched.identifier ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.identifier}</motion.span>) : null}
+               { errors.identifier && touched.identifier ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.identifier}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="FullName">Full Name</label>
@@ -63,7 +62,7 @@ export const Signup = React.memo(() => {
                       value={values.fullName} onChange={handleChange}
                       onBlur={handleBlur} placeholder="Full Name"/>
                { errors.fullName && touched.fullName ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-               { errors.fullName && touched.fullName ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.fullName}</motion.span>) : null}
+               { errors.fullName && touched.fullName ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.fullName}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="email">Email</label>
@@ -72,7 +71,7 @@ export const Signup = React.memo(() => {
                       value={values.email}
                       onChange={handleChange} onBlur={handleBlur} placeholder="Email"/>
                { errors.email && touched.email ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-               { errors.email && touched.email ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.email}</motion.span>) : null}
+               { errors.email && touched.email ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.email}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="password">Password</label>
@@ -81,7 +80,7 @@ export const Signup = React.memo(() => {
                       autoComplete={"current-password"} name="password"
                       value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
                { errors.password && touched.password ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-               { errors.password && touched.password ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.password}</motion.span>) : null}
+               { errors.password && touched.password ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.password}</motion.span>) : null}
            </div>
            <div aria-label={"group-form"} className={`${styles.groupForm}`}>
                <label htmlFor="confirmPassword">Confirm Password</label>
@@ -91,7 +90,7 @@ export const Signup = React.memo(() => {
                       value={values.confirmPassword} onChange={handleChange} onBlur={handleBlur}
                       placeholder="Confirm Password"/>
                { errors.confirmPassword && touched.confirmPassword ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-               { errors.confirmPassword && touched.confirmPassword ? (<motion.span initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.confirmPassword}</motion.span>) : null}
+               { errors.confirmPassword && touched.confirmPassword ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}}>{errors.confirmPassword}</motion.span>) : null}
            </div>
            <motion.button
                initial={{scale: 1.5}}
@@ -104,9 +103,9 @@ export const Signup = React.memo(() => {
                }}
                role={"button"}
                data-testid={"SignupBtn"}
-               className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}><VscSignIn /><span>Sing Up</span>
+               className={styles.styleBtn} aria-label={'Button To Sing Up In The Todo App'} type={"submit"}><VscSignIn /><span>Sign Up</span>
            </motion.button>
-           <span>I'm Ready Have Account ?<span className={styles.link} onClick={() => navigate(-1)}>Login</span></span>
+           <span>Already have an account?<span className={styles.link} onClick={() => navigate("/login")}>Log In</span></span>
        </form>
    </section>)
 });
