@@ -24,7 +24,6 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
     const resetField = useCallback(() => {
         dispatch({type: SET_TITLE_VALUE, payload: ''});
         dispatch({type: FILTERED_TODOS, payload: 'all'})
-        // state.filter = "all";
     }, [dispatch]);
 
     const handleDel = useCallback((e) => {
@@ -73,7 +72,7 @@ export const TodoItem = React.memo(({task, textDecoration, listTodos}) => {
     }, [handleBtnEdite]);
 
     return (<>
-        <motion.li drag dragConstraints={listTodos} className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
+        <motion.li drag dragConstraints={listTodos} role={"listitem"} className={`${styles['styleTask']} ${textDecoration && styles['taskDone']} ${state.message ? styles["blockEvent"] : ""}`}>
             <input type="checkbox" className={styles['doneStyle']} data-id={task.id} name={"done"} onChange={handleDone} value={task.done} ref={checkDone} checked={task.done}/>
             <div className={styles['boxEditing']}>
                 <span className={styles['spanTitleStyle']} ref={titleTodo} onClick={handleTitleClick}>{task.title}</span>

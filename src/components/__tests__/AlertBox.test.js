@@ -12,9 +12,10 @@ describe('test Alert Box Component', () => {
             </TodoProvider>
         );
 
-        await waitFor(() => {
-            expect(screen.getByText(/Title: Warning/i)).toBeInTheDocument();
-        });
+        // await waitFor(() => {
+        const titleBox =  await screen.findByText(/Title: Warning/i);
+            expect(titleBox).toBeInTheDocument();
+        // });
     });
 
     // test('Button <- Yes -> I The Alert Working', async () => {

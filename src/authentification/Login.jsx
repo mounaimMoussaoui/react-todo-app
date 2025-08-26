@@ -12,10 +12,11 @@ import { FaUserLock } from "react-icons/fa";
 import { NotificationBox } from "../components/NotificationBox";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { IoIosLogIn } from "react-icons/io";
+import bcryptjs from "bcryptjs";
 export const Login = React.memo(() => {
     const navigate = useNavigate();
     const [usersStorage] = useLocalStorage('listUsers', []);
-    const [, setUserSession] = useSession( "user", null);
+    const [ , setUserSession] = useSession( "user", null);
     const {state, dispatch} = useTodoContext();
 
     const onSubmit = useCallback(async (values) => {
@@ -29,10 +30,22 @@ export const Login = React.memo(() => {
             return 0;
         }
 
-        if (identifier && identifier === existUser[0]?.identifier && password && password === existUser[0]?.password) {
-            await setUserSession({identifier, password});
-            dispatch({type: PUT_NOTIFICATION, payload: `Welcome You're Login Now ${existUser[0].fullName}!!`});
-            navigate('/');
+        const isPasswordValid = bcryptjs.compareSync(password, existUser[0]?.hashPassword);
+
+        if (identifier && identifier === existUser[0]?.identifier && password && isPasswordValid) {
+            try {
+                const saltRounds = 10;
+                const hashedPassword = bcryptjs.hashSync(password, saltRounds);
+                const user = {
+                    identifier,
+                    hashedPassword
+                };
+                await setUserSession(user);
+                 dispatch({type: PUT_NOTIFICATION, payload: `Welcome You're Login Now ${user.identifier}!!`});
+                 navigate('/');
+            } catch (err) {
+                console.log(err);
+            }
         } else {
             dispatch({type: PUT_NOTIFICATION, payload: `Password Or Identifier Is Incorrect`});
         }
@@ -59,13 +72,13 @@ export const Login = React.memo(() => {
                 <label htmlFor="identifier">Identifier</label>
                 <input type="text" id="identifier" data-testid={"fieldIdentifier"} className={errors.identifier && touched.identifier ? styles.invalid : styles.valid} autoComplete={"username"} name="identifier" value={values.identifier} onChange={handleChange} onBlur={handleBlur} placeholder="Identifier Name"/>
                 { errors.identifier && touched.identifier ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-                { errors.identifier && touched.identifier  ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.identifier}</motion.span>) : null}
+                { errors.identifier && touched.identifier  ? (<motion.span aria-live={"polite"} initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.identifier}</motion.span>) : null}
             </div>
             <div aria-label={"login-password"} className={styles.groupForm}>
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" data-testid={"fieldPassword"} className={errors.password && touched.password ? styles.invalid : styles.valid} autoComplete={"current-password"} name="password" value={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="Password"/>
                 { errors.password && touched.password ? <FaTimes className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackErrors}`}/> : <FaCheck className={`${styles.icon} ${styles.iconFeedBack} ${styles.iconFeedBackValid}`}/>}
-                { errors.password && touched.password ? (<motion.span aria-live="polite" initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.password}</motion.span>) : null}
+                { errors.password && touched.password ? (<motion.span aria-live={"polite"} initial={{opacity: 0, scale: 0.5}} animate={{opacity: 1, scale: 1, transition: {duration: 0.5}}} exit={{opacity: 0}}>{errors.password}</motion.span>) : null}
             </div>
             <motion.button
                 whileHover={{

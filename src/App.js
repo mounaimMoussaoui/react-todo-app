@@ -67,7 +67,7 @@ export const App = React.memo(() => {
        <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
            { state.notification ? <NotificationBox /> : null }
            <FormUI />
-           <motion.ul aria-label="Todo List" ref={listTodos} className={styles.todoList}>
+           <motion.ul aria-label={"Todo List"} role={"list"} ref={listTodos} className={styles.todoList}>
                <Suspense fallback={<Loader />}>
                    {visibleTodos.length > 0
                        ? visibleTodos?.map((item) => {
