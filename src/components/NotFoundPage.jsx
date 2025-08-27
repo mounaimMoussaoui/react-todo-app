@@ -6,7 +6,7 @@ import {NOT_FOUND} from "../constants/actionTypes";
 import { CiNoWaitingSign } from "react-icons/ci";
 import {useNavigate} from "react-router-dom";
 
-export const NotFoundPage = React.memo(() => {
+export const     NotFoundPage = React.memo(() => {
     const {dispatch} = useTodoContext();
     const navigate = useNavigate();
 
