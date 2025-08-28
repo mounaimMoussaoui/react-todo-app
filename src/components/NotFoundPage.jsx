@@ -6,7 +6,7 @@ import {NOT_FOUND} from "../constants/actionTypes";
 import { CiNoWaitingSign } from "react-icons/ci";
 import {useNavigate} from "react-router-dom";
 
-export const     NotFoundPage = React.memo(() => {
+export const NotFoundPage = React.memo(() => {
     const {dispatch} = useTodoContext();
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export const     NotFoundPage = React.memo(() => {
         navigate(-1);
     }, [navigate]);
 
-    return <motion.div onClick={handleClick} intail={{x: 50}} animate={{x: 0, transition: {duration: 0.5} }} data-testid={"message"} className={styles.containerNotFound}>
+    return <motion.div onClick={handleClick} transition={{ type: "spring"}} initial={{y: 20}} animate={{y: 0 }} data-testid={"message"} className={styles.containerNotFound}>
             <CiNoWaitingSign className={styles.iconsError} />
             <motion.h1 initial={{opacity: 0}} animate={{ opacity: 1,  transition: {duration: 0.5} }} className={styles.notFound}  data-content={'Page.Not.Found'}>Page.Not.Found</motion.h1>
     </motion.div>

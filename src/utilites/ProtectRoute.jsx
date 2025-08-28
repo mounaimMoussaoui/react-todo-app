@@ -7,11 +7,8 @@ export const ProtectRoute = React.memo(({children}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(user === null) {
-            navigate("/login");
-        }
-    //eslint-disable-next-line
-    }, [user]);
+        if(!user) navigate("/login");
+    }, [user, navigate]);
 
     return children
 });

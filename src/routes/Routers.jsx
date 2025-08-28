@@ -5,9 +5,9 @@ import {App} from "../App";
 import {NotFoundPage} from "../components/NotFoundPage";
 import {Abouts} from "../components/Abouts";
 import {ProtectRoute} from "../utilites/ProtectRoute";
-import {Signup} from "../authentification/Signup";
+import {Signup} from "../authentication/Signup";
 import AuthenticationProvider from "../contexts/AuthenticationProvider";
-import {Login} from "../authentification/Login";
+import {Login} from "../authentication/Login";
 
 export const Routes = React.memo(() => {
     const browserRoutes = createBrowserRouter([
@@ -28,7 +28,7 @@ export const Routes = React.memo(() => {
                     element:  <App/>  ,
                 },
                 {
-                    path: '/About',
+                    path: '/about',
                     element: <Abouts />,
                 },
             ]

@@ -6,7 +6,6 @@ import styles from "../style/ModularStyle.module.scss";
 import {useTodoContext} from "../contexts/TodoProvider";
 import {PUT_NOTIFICATION} from "../constants/actionTypes";
 
-
 export const NotificationBox = React.memo(() => {
     const {state, dispatch} = useTodoContext();
     const handleClick = useCallback(() => {
@@ -14,13 +13,15 @@ export const NotificationBox = React.memo(() => {
     }, [dispatch]);
 
     useEffect(() => {
-        setTimeout(() => {
+        const id = setTimeout(() => {
             dispatch({type: PUT_NOTIFICATION, payload: null});
         }, 3000);
+
+        return () => clearTimeout(id);
     }, [dispatch]);
 
     return  (
-        <motion.div initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10, transition: {duration: 0.3}}} className={styles.notificationBox} >
+        <motion.div transition={{ type: "spring"}} initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10}} className={styles.notificationBox} >
             <IoMdNotificationsOutline />
             <span>{state.notification}</span>
             <TiTimesOutline onClick={handleClick} />

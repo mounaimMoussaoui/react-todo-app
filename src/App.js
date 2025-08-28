@@ -64,7 +64,7 @@ export const App = React.memo(() => {
     }, [state.globalTodos, state.startValue, state.nbElements, state.pagination]);
 
     return (
-       <motion.section initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} className={styles.container}>
+       <motion.section transition={{ type: "spring" }} initial={{opacity: 0}} animate={{ opacity: 1}} className={styles.container}>
            { state.notification ? <NotificationBox /> : null }
            <FormUI />
            <motion.ul aria-label={"Todo List"} role={"list"} ref={listTodos} className={styles.todoList}>

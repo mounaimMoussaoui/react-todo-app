@@ -36,7 +36,7 @@ export default function reducer(state, action) {
         };
         case SORTED_LIST_TODO: return {
             ...state,
-            todos: state.todos = [...state.todos.filter((todo) => !todo.done), ...state.todos.filter((todo) => todo.done)],
+            todos: [...state.todos.filter((todo) => !todo.done), ...state.todos.filter((todo) => todo.done)],
         };
         case FILTERED_TODOS:
             return {
@@ -45,12 +45,7 @@ export default function reducer(state, action) {
         };
         case EDIT_TODO: return {
             ...state,
-            todos: state.todos.map(todo => {
-                if(todo.id === action.payload.id) {
-                    todo.title = action.payload.titleEditing;
-                }
-                return todo;
-            })
+            todos: state.todos.map( todo => todo.id === action.payload.id ? { ...todo, title: action.payload.titleEditing } : todo )
         };
         case CLEAN_TODOS_DONE: return {
           ...state,

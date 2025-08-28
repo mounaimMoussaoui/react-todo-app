@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const SchemaSingUp = () => {
+export const SchemaSignUp = () => {
 
     const regularsRules = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).*$/
 

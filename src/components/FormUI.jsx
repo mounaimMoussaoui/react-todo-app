@@ -20,8 +20,8 @@ export const FormUI = React.memo(() => {
 
     const resetField = useCallback(() => {
         dispatch({type: SET_TITLE_VALUE, payload: ''});
-        state.filter = "all";
-    }, [dispatch, state]);
+        dispatch({ type: FILTERED_TODOS, payload: 'all' });
+    }, [dispatch]);
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
@@ -89,7 +89,7 @@ export const FormUI = React.memo(() => {
                 <option value='active'>Active</option>
             </select>
         </div>
-        <button className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"}> <MdAddTask /><span>Add New Task</span></button>
+        <button  className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"} disabled={ !state.titleValid } > <MdAddTask /><span>Add New Task</span></button>
 
         <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}><MdOutlineSort /><span>Sort by Status</span></button>
 

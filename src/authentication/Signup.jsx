@@ -1,7 +1,7 @@
 import {motion} from 'framer-motion';
 import styles from "../style/ModularStyle.module.scss";
 import {useFormik} from "formik";
-import {SchemaSingUp} from "../schemas/SchemaSingUp";
+import {SchemaSignUp} from "../schemas/SchemaSignUp";
 import {useNavigate} from "react-router-dom";
 import {useAuthenticationContext} from "../contexts/AuthenticationProvider";
 import {ADD_USER, PUT_NOTIFICATION} from "../constants/actionTypes";
@@ -41,7 +41,9 @@ export const Signup = React.memo(() => {
         dispatch({type: ADD_USER, payload: user});
         setUsersStorage((prevState) =>  [...prevState, user]);
         dispatchTodo({type: PUT_NOTIFICATION, payload: `${values.fullName} Your Account Create Successfully`});
-        setTimeout(() => navigate("/login"), 1500);
+        const id = setTimeout(() => navigate("/login"), 1500);
+
+        return clearTimeout(id);
     //eslint-disable-next-line
     }, [dispatch]);
 
@@ -53,7 +55,7 @@ export const Signup = React.memo(() => {
             password: '',
             confirmPassword: '',
         },
-        validationSchema: SchemaSingUp,
+        validationSchema: SchemaSignUp,
         onSubmit,
     });
 

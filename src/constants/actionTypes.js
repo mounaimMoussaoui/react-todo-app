@@ -1,7 +1,7 @@
 export const ADD_TODO = "ADD_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
 export const SET_DONE = "SET_DONE";
-export const SORTED_LIST_TODO = "SORTED_LIST";
+export const SORTED_LIST_TODO = "SORTED_LIST_TODO";
 export const FILTERED_TODOS = "FILTERED_TODOS";
 export const EDIT_TODO = "EDIT_TODO";
 export const CLEAN_TODOS_DONE = "CLEAN_TODOS_DONE";
