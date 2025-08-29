@@ -41,9 +41,8 @@ export const Signup = React.memo(() => {
         dispatch({type: ADD_USER, payload: user});
         setUsersStorage((prevState) =>  [...prevState, user]);
         dispatchTodo({type: PUT_NOTIFICATION, payload: `${values.fullName} Your Account Create Successfully`});
-        const id = setTimeout(() => navigate("/login"), 1500);
+        setTimeout(() => navigate("/login"), 1500);
 
-        return clearTimeout(id);
     //eslint-disable-next-line
     }, [dispatch]);
 

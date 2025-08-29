@@ -3,7 +3,31 @@
 a feature-rich to-do list built with React, Context API, useReducer, customs hooks, and scss Modules.
 Users can Create, edit, delete, search, filter, paginate, and persist tasks in localStorage.
 
-## Live Demo
+## Screenshots
+
+  # Authentication
+
+  * Login Page
+  ![Login Screenshot](./public/assets/authenticationPage.png)
+    
+  * Sign up Page
+  ![Sign Up Screenshot](./public/assets/signUppage.png)
+
+  # Main Pages
+
+  * Home Page
+  ![Home Screenshot](./public/assets/homePage.png)
+  
+  * home Page Editing Task
+  ![Modification Screenshot](./public/assets/homepageModification.png)
+  
+  * Home Page With Toast Box
+  ![Toast Box Screenshot](./public/assets/toastBox.png)
+
+  * About Page 
+  ![Abouts Screenshot](./public/assets/aboutPage.png)
+
+### Live Demo
 
 try it out here: 
 https://687c584e6112c142daf61e31--todo-curd-app-react.netlify.app/
