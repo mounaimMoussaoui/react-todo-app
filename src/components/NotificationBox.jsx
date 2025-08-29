@@ -21,7 +21,7 @@ export const NotificationBox = React.memo(() => {
     }, [dispatch]);
 
     return  (
-        <motion.div transition={{ type: "spring"}} initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10}} className={styles.notificationBox} >
+        <motion.div transition={{ type: "spring"}} initial={{opacity: 0, y: -100}} animate={{opacity: 1, y: 10}} className={styles.notificationBox} role={"status"} aria-live="polite">
             <IoMdNotificationsOutline />
             <span>{state.notification}</span>
             <TiTimesOutline onClick={handleClick} />

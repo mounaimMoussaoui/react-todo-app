@@ -89,10 +89,10 @@ export const FormUI = React.memo(() => {
                 <option value='active'>Active</option>
             </select>
         </div>
-        <button  className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"} disabled={ !state.titleValid } > <MdAddTask /><span>Add New Task</span></button>
+        <button  className={styles['styleFormBtn']} aria-label={"Button to Create New Task In Your Todo List"} type={"submit"} disabled={ !state.titleValid } > <MdAddTask aria-hidden="true"  /><span>Add New Task</span></button>
 
-        <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}><MdOutlineSort /><span>Sort by Status</span></button>
+        <button onClick={handelSort} aria-label={"Button to Create Sort Tasks In Your Todo List"} className={`${styles['styleFormBtn']} ${styles['sortBtn']}`}><MdOutlineSort aria-hidden="true"  /><span>Sort by Status</span></button>
 
-        <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}><GoTrash /><span>Clean Completed</span></button>
+        <button onClick={handleCleanCompleted} aria-label={"Button to Clean all complete Tasks"} className={`${styles['styleFormBtn']} ${styles['cleanBtn']}`}><GoTrash aria-hidden="true"  /><span>Clean Completed</span></button>
     </form>)
 })

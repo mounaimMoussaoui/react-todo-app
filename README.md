@@ -25,7 +25,7 @@ Users can Create, edit, delete, search, filter, paginate, and persist tasks in l
   ![Toast Box Screenshot](./public/assets/toastBox.png)
 
   * About Page 
-  ![Abouts Screenshot](./public/assets/aboutPage.png)
+  ![About Screenshot](./public/assets/aboutPage.png)
 
 ### Live Demo
 

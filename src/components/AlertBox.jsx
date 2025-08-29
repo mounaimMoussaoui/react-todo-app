@@ -19,7 +19,7 @@ export default function AlertBox() {
     }, [dispatch, state.idDel]);
 
     return (
-        <motion.div drag={'x'} initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} data-testid={"boxAlert"} className={styles['alertBox']}>
+        <motion.div drag={'x'} initial={{opacity: 0}} animate={{opacity: 1, transition: {duration: 0.5}}} data-testid={"boxAlert"} className={styles['alertBox']} role={"dialog"} aria-modal={true} aria-labelledby="alert-dialog">
 
             <h4 className={styles['titleAlert']}>Title: Warning</h4>
 

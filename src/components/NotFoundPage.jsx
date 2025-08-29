@@ -19,7 +19,7 @@ export const NotFoundPage = React.memo(() => {
     }, [navigate]);
 
     return <motion.div onClick={handleClick} transition={{ type: "spring"}} initial={{y: 20}} animate={{y: 0 }} data-testid={"message"} className={styles.containerNotFound}>
-            <CiNoWaitingSign className={styles.iconsError} />
+            <CiNoWaitingSign aria-hidden="true"  className={styles.iconsError} />
             <motion.h1 initial={{opacity: 0}} animate={{ opacity: 1,  transition: {duration: 0.5} }} className={styles.notFound}  data-content={'Page.Not.Found'}>Page.Not.Found</motion.h1>
     </motion.div>
 

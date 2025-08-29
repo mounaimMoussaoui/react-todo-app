@@ -31,7 +31,7 @@ export const PaginationForm = React.memo(() => {
                                className={styles['paginationBtn']}
                                id={'btnMoveDown'}
                                onClick={handlePagination}
-                               data-action={"moveDown"}><MdNavigateBefore /><span>Previous</span></motion.button>
+                               data-action={"moveDown"}><MdNavigateBefore aria-hidden="true"  /><span>Previous</span></motion.button>
 
                 <motion.span whileHover={{ opacity: 0.8 }}
                              className={styles['resultShower']}>{` ${totalPages} / ${currentPage}`}</motion.span>
@@ -42,6 +42,6 @@ export const PaginationForm = React.memo(() => {
                                className={styles['paginationBtn']}
                                id={'btnMoveUp'}
                                onClick={handlePagination}
-                               data-action={"moveUp"}><span>Next</span><MdNavigateNext /></motion.button>
+                               data-action={"moveUp"}><span>Next</span><MdNavigateNext aria-hidden="true"  /></motion.button>
            </motion.div>
 });

@@ -3,8 +3,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Layout} from "../components/Layout";
 import {App} from "../App";
 import {NotFoundPage} from "../components/NotFoundPage";
-import {Abouts} from "../components/Abouts";
-import {ProtectRoute} from "../utilites/ProtectRoute";
+import {About} from "../components/About";
+import {ProtectRoute} from "../utilities/ProtectRoute";
 import {Signup} from "../authentication/Signup";
 import AuthenticationProvider from "../contexts/AuthenticationProvider";
 import {Login} from "../authentication/Login";
@@ -29,7 +29,7 @@ export const Routes = React.memo(() => {
                 },
                 {
                     path: '/about',
-                    element: <Abouts />,
+                    element: <About />,
                 },
             ]
         },
